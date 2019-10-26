@@ -1,9 +1,8 @@
 import React from 'react';
-import Calendar from '../Calendar/Calendar';
-import Reservation from '../Reservation/Reservation';
+import Calendar from '../Components/Calendar';
+import Reservation from '../Components/Reservation/Reservation';
 import PropTypes from 'prop-types';
-import './App.css';
-import AddReservation from '../Reservation/AddReservation';
+import AddReservation from '../Components/Reservation/AddReservation';
 import {Route} from 'react-router-dom';
 
 class App extends React.Component {
