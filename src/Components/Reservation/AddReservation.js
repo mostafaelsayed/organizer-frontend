@@ -14,7 +14,7 @@ class AddReservation extends React.Component {
         console.log(reservation);
 
         if (reservation) {
-            this.props.onAddReservation(reservation);
+            this.props.addReservation(reservation);
         }
     }
 

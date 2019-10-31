@@ -1,20 +1,7 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 class Reservation extends React.Component {
-    // constructor() {
-    //     super();
-        
-
-    //     // this.addReservation = this.addReservation.bind(this);
-    // }
-
-    // addReservation(reservation) {
-    //     this.setState((state) => {
-    //         reservations: state.reservations.concat(reservation)
-    //     });
-    // }
-    
 
     render() {
         const element = (
@@ -23,10 +10,11 @@ class Reservation extends React.Component {
                 <ul className="reservation-list">
                     <Link to="/add-reservation">add</Link>
                     {this.props.reservations.map((e, index) => 
-                        <div key={index} className="reservation-container">
-                            <li>{e}</li>
+                        <div key={index} index={index} className="reservation-container">
+                            <li>{e.name}</li>
+                            <Link to={`/single/${e.id}`}>Go</Link>
                             <button onClick={() => {
-                                this.props.onRemoveReservation(e)
+                                this.props.removeReservation(index)
                             }}>Remove</button>
                         </div>
                     )}
