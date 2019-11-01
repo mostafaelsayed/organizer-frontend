@@ -1,10 +1,10 @@
 import React from 'react';
-import Reservation from '../Components/Reservation/Reservation';
+import Reservations from '../Components/Reservation/Reservations';
 import PropTypes from 'prop-types';
 import AddReservation from '../Components/Reservation/AddReservation';
 import { Route } from 'react-router-dom';
 
-import Single from './Single';
+import ReservationDetails from './Reservation/ReservationDetails';
 
 class App extends React.Component {
 
@@ -18,7 +18,7 @@ class App extends React.Component {
       <div>
         <Route exact path="/" render={() => (
           <div className="App">
-            <Reservation {...this.props} />
+            <Reservations {...this.props} />
           </div>
         )}/>
 
@@ -29,8 +29,8 @@ class App extends React.Component {
         )}/>
 
 
-        <Route path="/single/:id" render={(params) => (
-          <Single {...this.props} {...params} />
+        <Route path="/reservation/:id" render={(params) => (
+          <ReservationDetails {...this.props} {...params} />
         )}/>
 
 

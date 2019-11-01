@@ -1,3 +1,5 @@
+// App.js is just like main component but it is connected to the store
+
 import Main from './Main';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';

@@ -1,35 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-class Reservation extends React.Component {
+function Reservation(props) {
 
-    render() {
-        const element = (
-            <div>
-                <h1>Reservation here come</h1>
-                <ul className="reservation-list">
-                    <Link to="/add-reservation">add</Link>
-                    {this.props.reservations.map((e, index) => 
-                        <div key={index} index={index} className="reservation-container">
-                            <li>{e.name}</li>
-                            <Link to={`/single/${e.id}`}>Go</Link>
-                            <button onClick={() => {
-                                this.props.removeReservation(index)
-                            }}>Remove</button>
-                        </div>
-                    )}
-                </ul>
-            </div>
-        );
-
-
-        return element;
-    }
+    return (<div key={props.index} index={props.index} className="reservation-container">
+        <li>{props.value.name}</li>
+        <Link to={`/reservation/${props.value.id}`}>Go</Link>
+        <button onClick={() => {
+            props.removeReservation(props.index)
+        }}>Remove</button>
+    </div>);
 }
-
-// Reservation.propTypes = {
-//   reservations: PropTypes.array.isRequired,
-//   onRemoveReservation: PropTypes.func.isRequired
-// }
 
 export default Reservation;
