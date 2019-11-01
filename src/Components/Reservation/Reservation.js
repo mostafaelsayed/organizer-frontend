@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 function Reservation(props) {
 
@@ -10,6 +11,14 @@ function Reservation(props) {
             props.removeReservation(props.index)
         }}>Remove</button>
     </div>);
+}
+
+Reservation.propTypes = {
+    index: PropTypes.number,
+    value: PropTypes.shape({
+        name: PropTypes.string
+    }),
+    
 }
 
 export default Reservation;
