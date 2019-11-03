@@ -8,6 +8,10 @@ import ReservationDetails from './Reservation/ReservationDetails';
 
 class App extends React.Component {
 
+  componentDidMount() {
+    this.props.startLoadingReservations();
+  }
+
   constructor() {
     super();
   }

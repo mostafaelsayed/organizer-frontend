@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 function Reservation(props) {
 
@@ -7,9 +8,18 @@ function Reservation(props) {
         <li>{props.value.name}</li>
         <Link to={`/reservation/${props.value.id}`}>Go</Link>
         <button onClick={() => {
-            props.removeReservation(props.index)
+            props.startRemovingReservation(props.index, props.value.id)
         }}>Remove</button>
     </div>);
+}
+
+Reservation.propTypes = {
+    index: PropTypes.number,
+    value: PropTypes.shape({
+        name: PropTypes.string,
+        id: PropTypes.string
+    }),
+    
 }
 
 export default Reservation;
