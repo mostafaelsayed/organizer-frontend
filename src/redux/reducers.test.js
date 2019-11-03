@@ -10,7 +10,7 @@ describe('Reservations Reducer', () => {
     });
 
     it('Should return new state if received action', () => {
-        const newState = reservationsReducer(undefined, addReservation({name: 'doctor', id: 0}));
+        const newState = reservationsReducer(undefined, addReservation('doctor'));
         console.log('newState : ', newState);
         expect(newState).toEqual([{name: 'doctor', id: 0}]);
     });
