@@ -25,6 +25,17 @@ export function startLoadingReservations() {
     }
 }
 
+export function startLoadingReservation(id) {
+    return (dispatch) => {
+        return database.ref(`Reservations/${id}`).once('value').then((snapShot) => {
+            console.log('reservation data : ', snapShot.val());
+            dispatch( loadReservation(snapShot.val()) );
+        }).catch((err) => {
+            console.log('error fetch one reservation : ', err);
+        })
+    }
+}
+
 
 export function startRemovingReservation(index, id) {
     return (dispatch) => {
@@ -40,6 +51,13 @@ export function loadReservations(reservations) {
         type: "LOAD_RESERVATIONS",
         reservations
     };
+}
+
+export function loadReservation(reservation) {
+    return {
+        type: "LOAD_RESERVATION",
+        reservation
+    }
 }
 
 
