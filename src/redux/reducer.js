@@ -1,10 +1,12 @@
 import reservations from '../data/reservations';
 
-const reservationReducer = function(state = reservations, action) {
+const reservationReducer = function(state = {reservations: reservations, reservation: {}}, action) {
     console.log(action.type);
     switch (action.type) {
-        case 'REMOVE_RESERVATION': return [...state.slice(0, action.index), ...state.slice(action.index + 1)]
-        case 'ADD_RESERVATION': return [...state, {name: action.reservation.name, id: state.length > 0 ? state[state.length - 1].id + 1 : 0}]
+        case 'REMOVE_RESERVATION': return {"reservations": [...state.reservations.slice(0, action.index), ...state.reservations.slice(action.index + 1)], "reservation": state.reservation}
+        case 'ADD_RESERVATION': return {"reservations": [...state.reservations, {name: action.reservation, id: state.reservations.length > 0 ? state.reservations[state.reservations.length - 1].id + 1 : 0}], "reservation": state.reservation}
+        case 'LOAD_RESERVATIONS': return {"reservations": action.reservations, "reservation": state.reservation}
+        case 'LOAD_RESERVATION': return {"reservations": state.reservations, "reservation": action.reservation}
         default: return state;
     }
 }

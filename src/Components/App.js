@@ -7,7 +7,8 @@ import  * as actions from '../redux/actions';
 
 function mapStateToProps(state) {
     return {
-        reservations: state
+        reservations: state.reservations,
+        reservation: state.reservation
     }
 }
 

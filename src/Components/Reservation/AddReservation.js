@@ -14,16 +14,17 @@ class AddReservation extends React.Component {
         console.log(reservation);
 
         if (reservation) {
-            this.props.addReservation(reservation);
+            this.props.startAddingReservation(reservation);
+            //this.props.addReservation(reservation);
         }
     }
 
     render() {
         return (
             <div>
-                <form onSubmit={this.addReservation}>
+                <form className="reservation-form" onSubmit={this.addReservation}>
                     <input name="reservation" placeholder="add reservation description" type="text" />
-                    <button>Add</button>
+                    <button className="add-reservation">Add</button>
                 </form>
             </div>
         );

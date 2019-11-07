@@ -8,7 +8,7 @@ function Reservation(props) {
         <li>{props.value.name}</li>
         <Link to={`/reservation/${props.value.id}`}>Go</Link>
         <button onClick={() => {
-            props.removeReservation(props.index)
+            props.startRemovingReservation(props.index, props.value.id)
         }}>Remove</button>
     </div>);
 }
@@ -16,7 +16,8 @@ function Reservation(props) {
 Reservation.propTypes = {
     index: PropTypes.number,
     value: PropTypes.shape({
-        name: PropTypes.string
+        name: PropTypes.string,
+        id: PropTypes.string
     }),
     
 }
