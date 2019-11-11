@@ -1,11 +1,6 @@
 import React from 'react';
-
-import { shallow } from 'enzyme';
-
-//import {jest} from 'jest-enzyme';
-
+import { shallow, mount } from 'enzyme';
 import Reservation from './Reservation';
-
 import { checkProps } from '../../../Utils/index';
 import AddReservation from './AddReservation';
 
@@ -21,7 +16,7 @@ describe('Reservation Component', () => {
     let component;
 
     describe('Checking PropTypes', () => {
-        it('Should not throw warning', () => {
+        it('does not throw warning', () => {
             const expectedProps = {
                 index: 0,
                 value: {
@@ -39,21 +34,26 @@ describe('Reservation Component', () => {
 
     beforeEach(() => {
         mockFunc = jest.fn();
-        const reservation = {name: 'doctor', id: 0};
+        const reservation = {name: 'doctor', id: '0'};
         component = setup({value: reservation, index: 0});
-    })
+    });
 
-    it('It should run without any errors', () => {
+    it('run without any errors', () => {
         const className = component.find('.reservation-container');
         expect(className.length).toBe(1);
     });
 
 
-    it('Should emit callback after click', () => {
-        const form = shallow(<AddReservation />).find('.reservation-form');
-        console.log(form.debug());
-        form.simulate('click');
-        //const callback = mockFunc.mock.calls.length;
+    it('emit callback after click', () => {
+        let props = {
+            addReservation: mockFunc
+        };
+        console.log(props);
+        const form = mount(<AddReservation {...props} />).find('.add-reservation');
+        // console.log(form.debug());
+        form.simulate('submit');
+        //console.log(mockFunc.mock);
+        const callback = mockFunc.mock.calls.length;
         expect(callback).toBe(1);
 
     });

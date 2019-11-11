@@ -9,13 +9,19 @@ class AddReservation extends React.Component {
     }
 
     addReservation(event) {
-        event.preventDefault();
-        const reservation = event.target.elements.reservation.value;
-        console.log(reservation);
+        // console.log('submit event : ', event);
+        // if (this.props.addReservation) {
+        //     this.props.addReservation();
+        // }
+        if (event) {
+            event.preventDefault();
+            const reservation = event.target.elements ? event.target.elements.reservation.value : '';
+            console.log(reservation);
 
-        if (reservation) {
-            this.props.startAddingReservation(reservation);
-            //this.props.addReservation(reservation);
+            if (reservation && this.props.startAddingReservation) {
+                this.props.startAddingReservation(reservation);
+                //this.props.addReservation(reservation);
+            }
         }
     }
 

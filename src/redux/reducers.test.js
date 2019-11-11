@@ -6,12 +6,20 @@ import reservationsReducer from './reducer';
 describe('Reservations Reducer', () => {
     it('Should return default state', () => {
         const newState = reservationsReducer(undefined, {});
-        expect(newState).toEqual([]);
+        expect(newState).toEqual({reservations: [], reservation: {}});
     });
 
-    it('Should return new state if received action', () => {
+    it('add reservation', () => {
         const newState = reservationsReducer(undefined, addReservation('doctor'));
-        console.log('newState : ', newState);
-        expect(newState).toEqual([{name: 'doctor', id: 0}]);
+        //console.log('newState : ', newState);
+        expect(newState.reservations[0].name).toEqual('doctor');
     });
+
+    it('remove reservation', () => {
+        const newState = reservationsReducer({reservations: [{'name': 'ay 7aga'}], reservation: {}}, removeReservation(0));
+        console.log('newState : ', newState);
+        expect(newState.reservations.length).toEqual(0);
+    });
+
+    
 });
