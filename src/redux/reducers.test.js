@@ -1,6 +1,7 @@
 
-import {addReservation, removeReservation} from './actions';
+import {addReservation, removeReservation, loadReservations, loadReservation} from './actions';
 import reservationsReducer from './reducer';
+import reservationReducer from './reducer';
 
 
 describe('Reservations Reducer', () => {
@@ -20,6 +21,22 @@ describe('Reservations Reducer', () => {
         console.log('newState : ', newState);
         expect(newState.reservations.length).toEqual(0);
     });
+
+    it('load reservations : ', () => {
+        const reservations = reservationReducer({reservation: {}}, loadReservations([]));
+        expect(reservations).toEqual({"reservation": {}, "reservations": []});
+    });
+
+    it('load one reservation', () => {
+        const reservation = reservationReducer({reservations: [{name: 'doctor', id: '2'}]}, loadReservation({name: 'doctor', id: '2'}));
+        expect(reservation).toEqual({reservations: [{name: 'doctor', id: '2'}], reservation: {name: 'doctor', id: '2'}});
+    });
+
+    // describe('Return Modified state', () => {
+    //     it('return state after add reservation', () => {
+            
+    //     });
+    // });
 
     
 });

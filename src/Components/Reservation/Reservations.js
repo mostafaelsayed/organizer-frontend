@@ -11,7 +11,7 @@ class Reservations extends React.Component {
                 <ul className="reservation-list">
                     <Link to="/add-reservation">add</Link>
                     {this.props.reservations.map((e, index) => 
-                        <Reservation {...this.props} key={index} index={index} value={e} />
+                        <Reservation className="child-reservation" {...this.props} key={index} index={index} value={e} />
                     )}
                 </ul>
             </div>

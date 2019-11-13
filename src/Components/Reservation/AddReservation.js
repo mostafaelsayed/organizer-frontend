@@ -9,26 +9,17 @@ class AddReservation extends React.Component {
     }
 
     addReservation(event) {
-        // console.log('submit event : ', event);
-        // if (this.props.addReservation) {
-        //     this.props.addReservation();
-        // }
-        if (event) {
-            event.preventDefault();
-            const reservation = event.target.elements ? event.target.elements.reservation.value : '';
-            console.log(reservation);
+        event.preventDefault();
+        const reservation = event.target.elements.reservation.value;
+        console.log(reservation);
 
-            if (reservation && this.props.startAddingReservation) {
-                this.props.startAddingReservation(reservation);
-                //this.props.addReservation(reservation);
-            }
-        }
+        this.props.startAddingReservation(reservation);
     }
 
     render() {
         return (
             <div>
-                <form className="reservation-form" onSubmit={this.addReservation}>
+                <form className="reservation-form" onSubmit={(e) => this.addReservation(e)}>
                     <input name="reservation" placeholder="add reservation description" type="text" />
                     <button className="add-reservation">Add</button>
                 </form>
