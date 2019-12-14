@@ -15,7 +15,7 @@ class ReservationDetails extends React.Component {
         // console.log(id);
         // const reservation = reservations.find((reserv) => {return reserv.id === id;});
         // console.log(reservation);
-        return <div>Details here : {this.props.reservation ? this.props.reservation.name : ''}</div>;
+        return <div className="reservation-details">Details here : { this.props.reservation.name }</div>;
     }
 }
 

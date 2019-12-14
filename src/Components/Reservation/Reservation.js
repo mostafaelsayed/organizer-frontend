@@ -7,7 +7,7 @@ function Reservation(props) {
     return (<div key={props.index} index={props.index} className="reservation-container">
         <li>{props.value.name}</li>
         <Link to={`/reservation/${props.value.id}`}>Go</Link>
-        <button onClick={() => {
+        <button className="remove" onClick={() => {
             props.startRemovingReservation(props.index, props.value.id)
         }}>Remove</button>
     </div>);
