@@ -20,7 +20,7 @@ const firebaseConfig = {
 //     }
 // };
 
-const apiUrl = window.location.href.startsWith('https') === true ? 'https://the-organizer-backend' : 'http://localhost:4000';
+const apiUrl = window.location.href.startsWith('https') === true ? 'https://the-organizer-backend.herokuapp.com' : 'http://localhost:4000';
 
 firebase.initializeApp(firebaseConfig);
 
