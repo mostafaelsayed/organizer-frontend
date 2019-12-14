@@ -1,5 +1,16 @@
-import {database} from '../database/config';
+import {database, apiUrl} from '../database/config';
+import axios from 'axios';
 
+export function startAddingUser(user) {
+    return (dispatch) => {
+        return axios.post(apiUrl + '/api/register', user).then((success) => {
+            console.log('success adding user : ', success);
+            dispatch(addUser(user));
+        }).catch((err) => {
+            console.error('error adding user : ', err);
+        });
+    }
+}
 
 export function startAddingReservation(reservation) {
     return (dispatch) => {
@@ -73,5 +84,12 @@ export function addReservation(reservation) {
     return {
         type: "ADD_RESERVATION",
         reservation: reservation
+    }
+}
+
+export function addUser(user) {
+    return {
+        type: "ADD_USER",
+        user: user
     }
 }

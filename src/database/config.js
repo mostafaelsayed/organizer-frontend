@@ -11,8 +11,19 @@ const firebaseConfig = {
     measurementId: "G-79NQPF9Z5W"
 };
 
+// const config = {
+//     dev: {
+//         url: 'http://localhost:4000',
+//     },
+//     prod: {
+//         url: 'https://the-organizer-backend'
+//     }
+// };
+
+const apiUrl = window.location.href.startsWith('https') === true ? 'https://the-organizer-backend' : 'http://localhost:4000';
+
 firebase.initializeApp(firebaseConfig);
 
 const database = firebase.database();
 
-export {database};
+export {database, apiUrl};
