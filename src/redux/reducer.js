@@ -7,6 +7,7 @@ const reservationReducer = function(state = {reservations: reservations, reserva
         case 'ADD_RESERVATION': return {"reservations": [...state.reservations, {name: action.reservation, id: state.reservations.length > 0 ? state.reservations[state.reservations.length - 1].id + 1 : 0}], "reservation": state.reservation}
         case 'LOAD_RESERVATIONS': return {"reservations": action.reservations, "reservation": state.reservation}
         case 'LOAD_RESERVATION': return {"reservations": state.reservations, "reservation": action.reservation}
+        case 'LOG_USER_IN' : return {"reservations": state.reservations, "reservation": state.reservation, "user": action.user}
         default: return state;
     }
 }

@@ -5,11 +5,22 @@ export function startAddingUser(user) {
     return (dispatch) => {
         return axios.post(apiUrl + '/api/register', user).then((success) => {
             console.log('success adding user : ', success);
-            dispatch(addUser(user));
+            dispatch(addUser(success.data.user));
         }).catch((err) => {
             console.error('error adding user : ', err);
         });
-    }
+    };
+}
+
+export function startLoggingUserIn(user) {
+    return (dispatch) => {
+        return axios.post(apiUrl + '/api/login', user).then((success) => {
+            console.log('success logging user in : ', success);
+            dispatch(logUserIn(success));
+        }).catch((err) => {
+            console.error('error logging user in : ', err);
+        });
+    };
 }
 
 export function startAddingReservation(reservation) {
@@ -19,7 +30,7 @@ export function startAddingReservation(reservation) {
         }).catch((err) => {
             console.log('error add reservation to database : ', err);
         });
-    }
+    };
 }
 
 export function startLoadingReservations() {
@@ -33,7 +44,7 @@ export function startLoadingReservations() {
             });
             dispatch(loadReservations(reservations));
         })
-    }
+    };
 }
 
 export function startLoadingReservation(id) {
@@ -44,7 +55,7 @@ export function startLoadingReservation(id) {
         }).catch((err) => {
             console.log('error fetch one reservation : ', err);
         })
-    }
+    };
 }
 
 
@@ -53,7 +64,7 @@ export function startRemovingReservation(index, id) {
         return database.ref(`Reservations/${id}`).remove().then(() => {
             dispatch(removeReservation(index));
         })
-    }
+    };
 }
 
 
@@ -68,7 +79,7 @@ export function loadReservation(reservation) {
     return {
         type: "LOAD_RESERVATION",
         reservation
-    }
+    };
 }
 
 
@@ -84,12 +95,19 @@ export function addReservation(reservation) {
     return {
         type: "ADD_RESERVATION",
         reservation: reservation
-    }
+    };
 }
 
 export function addUser(user) {
     return {
         type: "ADD_USER",
         user: user
-    }
+    };
+}
+
+export function logUserIn(user) {
+    return {
+        type: "LOG_USER_IN",
+        user
+    };
 }
