@@ -12,16 +12,16 @@ import Register from './Register';
 
 class App extends React.Component {
 
-  componentDidMount() {
-    this.props.startLoadingReservations();
-  }
+  // componentDidMount() {
+  //   this.props.startLoadingReservations();
+  // }
 
   // constructor() {
   //   super();
   // }
   
   render() {
-    console.log(this.props);
+    // console.log('initial props : ', this.props);
     return (
       <div>
 
@@ -32,25 +32,31 @@ class App extends React.Component {
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav">
               <li className="nav-item active"><Link className="nav-link" to="/">Home</Link></li>
+              <li className="nav-item active"><Link className="nav-link" to="/reservations">Your Reservations</Link></li>
               <li className="nav-item"><Link className="nav-link" to="/register">Register</Link></li>
               <li className="nav-item"><Link className="nav-link" to="/login">Login</Link></li>
+              <li className="nav-item"><Link className="nav-link" to="/logout">Logout</Link></li>
             </ul>
           </div>
         </nav>
 
         <div id="app-container">
           <Route exact path="/" render={() => (
+            <h1>Welcome</h1>
+          )}/>
+
+          <Route exact path="/reservations" render={(params) => (
             <div className="App">
-              <Reservations {...this.props} />
+              <Reservations {...this.props} {...params} />
             </div>
           )}/>
 
-          <Route path="/login" render={(params) => (
-            <Login {...this.props} {...params} />
+          <Route path="/login" render={() => (
+            <Login {...this.props} />
           )}/>
 
-          <Route path="/register" render={(params) => (
-            <Register {...this.props} {...params} />
+          <Route path="/register" render={() => (
+            <Register {...this.props} />
           )}/>
           
           <Route path="/add-reservation" render={() => (

@@ -17,7 +17,7 @@ Reservation.propTypes = {
     index: PropTypes.number,
     value: PropTypes.shape({
         name: PropTypes.string,
-        id: PropTypes.string
+        id: PropTypes.number
     }),
     
 }

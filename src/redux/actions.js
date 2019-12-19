@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export function startAddingUser(user) {
     return (dispatch) => {
-        return axios.post(apiUrl + '/api/register', user).then((success) => {
+        return axios.post(apiUrl + '/api/user/register', user).then((success) => {
             console.log('success adding user : ', success);
             dispatch(addUser(success.data.user));
         }).catch((err) => {
@@ -14,9 +14,10 @@ export function startAddingUser(user) {
 
 export function startLoggingUserIn(user) {
     return (dispatch) => {
-        return axios.post(apiUrl + '/api/login', user).then((success) => {
+        return axios.post(apiUrl + '/api/user/login', user).then((success) => {
             console.log('success logging user in : ', success);
-            dispatch(logUserIn(success));
+            localStorage.setItem('jwt', success.data.jwt);
+            dispatch(logUserIn(success.data.user));
         }).catch((err) => {
             console.error('error logging user in : ', err);
         });
@@ -35,15 +36,29 @@ export function startAddingReservation(reservation) {
 
 export function startLoadingReservations() {
     return (dispatch) => {
-        return database.ref('Reservations').once('value').then((snapShot) => {
-            let reservations = [];
-            snapShot.forEach((childSnapShot) => {
-                let reservation = {id: childSnapShot.key};
-                reservation.name = childSnapShot.val().name;
-                reservations.push(reservation);
-            });
-            dispatch(loadReservations(reservations));
-        })
+        // return database.ref('Reservations').once('value').then((snapShot) => {
+        return axios.get(apiUrl + '/api/reservation/getAll', {headers: {authorization: localStorage.getItem('jwt')}}).then((success) => {
+            // let reservations = [];
+            console.log('success load : ', success);
+            // snapShot.forEach((childSnapShot) => {
+            //     let reservation = {id: childSnapShot.key};
+            //     reservation.name = childSnapShot.val().name;
+            //     reservations.push(reservation);
+            // });
+            if (success.data.message === 'Failed to authenticate token') {
+                localStorage.removeItem('jwt');
+                dispatch(failToken(true));
+            }
+            else {
+                let reservations = success.data.reservations;
+                dispatch(loadReservations(reservations));
+            }
+        }).catch((err) => {
+            console.log('error load reservations : ', err);
+
+            localStorage.removeItem('jwt');
+            dispatch(failToken(true));
+        });
     };
 }
 
@@ -109,5 +124,12 @@ export function logUserIn(user) {
     return {
         type: "LOG_USER_IN",
         user
+    };
+}
+
+export function failToken(failTokenStatus) {
+    return {
+        "type": 'FAIL_TOKEN',
+        failTokenStatus
     };
 }
