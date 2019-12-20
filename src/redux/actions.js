@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export function startAddingUser(user) {
     return (dispatch) => {
-        return axios.post(apiUrl + '/api/user/register', user).then((success) => {
+        return axios.post(apiUrl + '/api/user/register', user, {withCredentials: true}).then((success) => {
             console.log('success adding user : ', success);
             dispatch(addUser(success.data.user));
         }).catch((err) => {
@@ -14,7 +14,7 @@ export function startAddingUser(user) {
 
 export function startLoggingUserIn(user) {
     return (dispatch) => {
-        return axios.post(apiUrl + '/api/user/login', user).then((success) => {
+        return axios.post(apiUrl + '/api/user/login', user, {withCredentials: true}).then((success) => {
             console.log('success logging user in : ', success);
             localStorage.setItem('jwt', success.data.jwt);
             dispatch(logUserIn(success.data.user));
@@ -36,15 +36,10 @@ export function startAddingReservation(reservation) {
 
 export function startLoadingReservations() {
     return (dispatch) => {
-        // return database.ref('Reservations').once('value').then((snapShot) => {
-        return axios.get(apiUrl + '/api/reservation/getAll', {headers: {authorization: localStorage.getItem('jwt')}}).then((success) => {
-            // let reservations = [];
+        // why withCredentials to get session to work ??
+        return axios.get(apiUrl + '/api/reservation/getAll', {headers: {authorization: localStorage.getItem('jwt')}, withCredentials: true}).then((success) => {
             console.log('success load : ', success);
-            // snapShot.forEach((childSnapShot) => {
-            //     let reservation = {id: childSnapShot.key};
-            //     reservation.name = childSnapShot.val().name;
-            //     reservations.push(reservation);
-            // });
+          
             if (success.data.message === 'Failed to authenticate token') {
                 localStorage.removeItem('jwt');
                 dispatch(failToken(true));

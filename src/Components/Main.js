@@ -45,7 +45,9 @@ class App extends React.Component {
             <h1>Welcome</h1>
           )}/>
 
+          
           <Route exact path="/reservations" render={(params) => (
+            // pass params in render to access location, match or history props
             <div className="App">
               <Reservations {...this.props} {...params} />
             </div>
