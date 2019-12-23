@@ -2,7 +2,7 @@ import React from 'react';
 import Reservations from '../Components/Reservation/Reservations';
 import PropTypes from 'prop-types';
 import AddReservation from '../Components/Reservation/AddReservation';
-import { Route, Link } from 'react-router-dom';
+import { Route, Link, withRouter } from 'react-router-dom';
 
 import ReservationDetails from './Reservation/ReservationDetails';
 import Login from './Login';
@@ -12,13 +12,34 @@ import Register from './Register';
 
 class App extends React.Component {
 
-  // componentDidMount() {
-  //   this.props.startLoadingReservations();
+  constructor() {
+    super();
+
+    this.logout = this.logout.bind(this);
+  }
+
+  logout(e) {
+    this.props.startLogginUserOut();
+  }
+
+  componentDidMount() {
+    console.log('current route : ', this.props.location.pathname);
+    let list = ['/login', '/', '/register'];
+
+    if (list.indexOf(this.props.location.pathname) === -1) {
+      this.props.getUserInSession();
+    }
+  }
+
+  // componentDidUpdate() {
+  //   if (this.props.failTokenStatus === true) {
+  //       this.props.history.push('/login');
+  //   }
   // }
 
-  // constructor() {
-  //   super();
-  // }
+
+
+  
   
   render() {
     // console.log('initial props : ', this.props);
@@ -33,9 +54,9 @@ class App extends React.Component {
             <ul className="navbar-nav">
               <li className="nav-item active"><Link className="nav-link" to="/">Home</Link></li>
               <li className="nav-item active"><Link className="nav-link" to="/reservations">Your Reservations</Link></li>
-              <li className="nav-item"><Link className="nav-link" to="/register">Register</Link></li>
-              <li className="nav-item"><Link className="nav-link" to="/login">Login</Link></li>
-              <li className="nav-item"><Link className="nav-link" to="/logout">Logout</Link></li>
+              {!localStorage.getItem('jwt') && <li className="nav-item"><Link className="nav-link" to="/register">Register</Link></li>}
+              {!localStorage.getItem('jwt') && <li className="nav-item"><Link className="nav-link" to="/login">Login</Link></li>}
+              {localStorage.getItem('jwt') && <li className="nav-item"><button className="btn btn-primary btn-sm" onClick={(e) => this.logout(e)}>Logout</button></li>}
             </ul>
           </div>
         </nav>
@@ -53,8 +74,8 @@ class App extends React.Component {
             </div>
           )}/>
 
-          <Route path="/login" render={() => (
-            <Login {...this.props} />
+          <Route path="/login" render={(params) => (
+            <Login {...this.props} {...params} />
           )}/>
 
           <Route path="/register" render={() => (
@@ -84,4 +105,5 @@ App.propTypes = {
   // onRemoveReservation: PropTypes.func.isRequired
 }
 
-export default App;
+// to access props location, match
+export default withRouter(App);
