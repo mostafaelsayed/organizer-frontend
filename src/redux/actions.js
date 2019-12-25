@@ -90,13 +90,16 @@ export function startLoadingReservations() {
 // }
 
 
-// export function startRemovingReservation(index, id) {
-//     return (dispatch) => {
-//         return database.ref(`Reservations/${id}`).remove().then(() => {
-//             dispatch(removeReservation(index));
-//         })
-//     };
-// }
+export function startRemovingReservation(index, id) {
+    return (dispatch) => {
+        return axios.post(apiUrl + '/api/reservation/delete', {reservationId: id}, {headers: {authorization: localStorage.getItem('jwt')}, withCredentials: true}).then((success) => {
+            console.log('success delete reservation : ', success);
+            dispatch(removeReservation(index));
+        }).catch((err) => {
+            console.error('error delete reservation : ', err);
+        });
+    };
+}
 
 
 export function loadReservations(reservations) {
