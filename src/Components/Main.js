@@ -2,7 +2,7 @@ import React from 'react';
 import Reservations from '../Components/Reservation/Reservations';
 import PropTypes from 'prop-types';
 import AddReservation from '../Components/Reservation/AddReservation';
-import { Route, Link, withRouter } from 'react-router-dom';
+import { Route, Link, withRouter, Redirect } from 'react-router-dom';
 
 import ReservationDetails from './Reservation/ReservationDetails';
 import Login from './Login';
@@ -76,10 +76,16 @@ class App extends React.Component {
             <AddReservation {...this.props} {...params} />
           )}/>
 
-
-          <Route path="/reservation/:id" render={(params) => (
-            <ReservationDetails {...this.props} {...params} />
-          )}/>
+          <div>
+            {
+            this.props.failTokenStatus === false ?
+              <Route path="/reservation/:id" render={(params) => (
+                <ReservationDetails {...this.props} {...params} />
+              )}/>
+            
+              : <Redirect to="/login" />
+            }
+          </div>
         </div>
         
          

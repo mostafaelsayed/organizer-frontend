@@ -24,6 +24,20 @@ export function startLoggingUserIn(user) {
     };
 }
 
+export function startLogginUserOut(history) {
+    return (dispatch) => {
+        return axios.get(apiUrl + '/api/user/logout', {headers: {authorization: localStorage.getItem('jwt')}, withCredentials: true}).then((success) => {
+            console.log('success logout : ', success);
+            localStorage.removeItem('jwt');
+            localStorage.removeItem('user');
+            dispatch(logUserOut());
+            history.push('/');
+        }).catch((err) => {
+            console.error('error logout : ', err);
+        });
+    }
+}
+
 export function getUserInSession() {
     return (dispatch) => {
         return axios.get(apiUrl + '/api/user/getUserInSession', {headers: {authorization: localStorage.getItem('jwt')}, withCredentials: true}).then((success) => {
@@ -79,16 +93,16 @@ export function startLoadingReservations() {
     };
 }
 
-// export function startLoadingReservation(id) {
-//     return (dispatch) => {
-//         return database.ref(`Reservations/${id}`).once('value').then((snapShot) => {
-//             console.log('reservation data : ', snapShot.val());
-//             dispatch( loadReservation(snapShot.val()) );
-//         }).catch((err) => {
-//             console.log('error fetch one reservation : ', err);
-//         })
-//     };
-// }
+export function startLoadingReservation(id) {
+    return (dispatch) => {
+        return axios.get(apiUrl + `/api/reservation/get/${id}`, {headers: {authorization: localStorage.getItem('jwt')}, withCredentials: true}).then((success) => {
+            console.log('success get reservation : ', success);
+            dispatch( loadReservation(success.data.reservation) );
+        }).catch((err) => {
+            console.log('error fetch one reservation : ', err);
+        })
+    };
+}
 
 
 export function startRemovingReservation(index, id) {
@@ -152,20 +166,6 @@ export function failToken(failTokenStatus) {
         "type": 'FAIL_TOKEN',
         failTokenStatus
     };
-}
-
-export function startLogginUserOut(history) {
-    return (dispatch) => {
-        return axios.get(apiUrl + '/api/user/logout').then((success) => {
-            console.log('success logout : ', success);
-            localStorage.removeItem('jwt');
-            localStorage.removeItem('user');
-            dispatch(logUserOut());
-            history.push('/');
-        }).catch((err) => {
-            console.error('error logout : ', err);
-        });
-    }
 }
 
 export function logUserOut() {
