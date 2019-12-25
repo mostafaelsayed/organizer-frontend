@@ -19,7 +19,7 @@ class App extends React.Component {
   }
 
   logout(e) {
-    this.props.startLogginUserOut();
+    this.props.startLogginUserOut(this.props.history);
   }
 
   componentDidMount() {
@@ -30,16 +30,6 @@ class App extends React.Component {
       this.props.getUserInSession();
     }
   }
-
-  // componentDidUpdate() {
-  //   if (this.props.failTokenStatus === true) {
-  //       this.props.history.push('/login');
-  //   }
-  // }
-
-
-
-  
   
   render() {
     // console.log('initial props : ', this.props);
@@ -82,8 +72,8 @@ class App extends React.Component {
             <Register {...this.props} />
           )}/>
           
-          <Route path="/add-reservation" render={() => (
-            <AddReservation {...this.props} />
+          <Route path="/add-reservation" render={(params) => (
+            <AddReservation {...this.props} {...params} />
           )}/>
 
 

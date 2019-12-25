@@ -8,19 +8,12 @@ class AddReservation extends React.Component {
         this.addReservation = this.addReservation.bind(this);
     }
 
-    componentDidUpdate() {
-        console.log('this.props : ', this.props);
-        if (this.props.failTokenStatus === true) {
-            this.props.history.push('/login');
-        }
-    }
-
     addReservation(event) {
         event.preventDefault();
         const reservation = event.target.elements.reservation.value;
         console.log(reservation);
 
-        this.props.startAddingReservation(reservation, this.props.user.id);
+        this.props.startAddingReservation(reservation, this.props.user.id, this.props.history);
     }
 
     render() {

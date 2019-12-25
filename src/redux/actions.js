@@ -44,11 +44,12 @@ export function getUserInSession() {
 }
 
 
-export function startAddingReservation(reservation, userId) {
+export function startAddingReservation(reservation, userId, history) {
     return (dispatch) => {
         return axios.post(apiUrl + '/api/reservation/add', {userId: userId, reservation: {name: reservation}}, {headers: {authorization: localStorage.getItem('jwt')}, withCredentials: true}).then((success) => {
             console.log('success adding reservation : ', success);
             dispatch(addReservation(reservation));
+            history.push('/reservations');
         }).catch((err) => {
             console.log('error add reservation to database : ', err);
         });
@@ -153,13 +154,14 @@ export function failToken(failTokenStatus) {
     };
 }
 
-export function startLogginUserOut() {
+export function startLogginUserOut(history) {
     return (dispatch) => {
         return axios.get(apiUrl + '/api/user/logout').then((success) => {
             console.log('success logout : ', success);
             localStorage.removeItem('jwt');
             localStorage.removeItem('user');
             dispatch(logUserOut());
+            history.push('/');
         }).catch((err) => {
             console.error('error logout : ', err);
         });
