@@ -21,7 +21,7 @@ class AddReservation extends React.Component {
             <div>
             {this.props.failTokenStatus === false ? 
                 <div>
-                    <form className="reservation-form" onSubmit={(e) => this.addReservation(e)}>
+                    <form className="reservation-form" onSubmit={this.addReservation}>
                         <input name="reservation" placeholder="add reservation description" type="text" />
                         <button className="add-reservation">Add</button>
                     </form>

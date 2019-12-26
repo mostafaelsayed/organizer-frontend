@@ -19,7 +19,7 @@ class Login extends Component {
 
     render() {
         return (
-            <form onSubmit={(e) => this.loginUser(e)}>
+            <form onSubmit={this.loginUser}>{/*pass callback as function not as string like normal javascript would do */}
                 <div><input type="text" name="email" placeholder="Enter Your Email ..." /></div>
                 <br />
                 <div><input type="password" name="password" placeholder="Enter Your Password ..." /></div>

@@ -18,7 +18,7 @@ class App extends React.Component {
     this.logout = this.logout.bind(this);
   }
 
-  logout(e) {
+  logout() {
     this.props.startLogginUserOut(this.props.history);
   }
 
@@ -46,7 +46,7 @@ class App extends React.Component {
               <li className="nav-item active"><Link className="nav-link" to="/reservations">Your Reservations</Link></li>
               {!localStorage.getItem('jwt') && <li className="nav-item"><Link className="nav-link" to="/register">Register</Link></li>}
               {!localStorage.getItem('jwt') && <li className="nav-item"><Link className="nav-link" to="/login">Login</Link></li>}
-              {localStorage.getItem('jwt') && <li className="nav-item"><button className="btn btn-primary btn-sm" onClick={(e) => this.logout(e)}>Logout</button></li>}
+              {localStorage.getItem('jwt') && <li className="nav-item"><button className="btn btn-primary btn-sm" onClick={this.logout}>Logout</button></li>}
             </ul>
           </div>
         </nav>
