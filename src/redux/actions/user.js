@@ -19,28 +19,9 @@ export function addUser(user) {
     };
 }
 
-export function getUserInSession() {
-    return (dispatch) => {
-        return axios.get(apiUrl + '/api/user/getUserInSession', {headers: {authorization: localStorage.getItem('jwt')}, withCredentials: true}).then((success) => {
-            console.log('success get user in session : ', success);
-            if (success.data.user && success.data.user.id) {
-                dispatch(logUserIn(success.data.user));
-            }
-            else {
-                localStorage.removeItem('jwt');
-                localStorage.removeItem('user');
-                dispatch(logUserOut());
-
-            }
-        }).catch((err) => {
-            console.error('error get user in session : ', err);
-        });
-    }
-}
-
 export function startLoggingUserIn(user) {
     return (dispatch) => {
-        return axios.post(apiUrl + '/api/user/login', user, {headers: {authorization: localStorage.getItem('jwt')}, withCredentials: true}).then((success) => {
+        return axios.post(apiUrl + '/api/user/login', user).then((success) => {
             console.log('success logging user in : ', success);
             localStorage.setItem('jwt', success.data.jwt);
             dispatch(logUserIn(success.data.user));
@@ -59,15 +40,10 @@ export function logUserIn(user) {
 
 export function startLogginUserOut(history) {
     return (dispatch) => {
-        return axios.get(apiUrl + '/api/user/logout', {headers: {authorization: localStorage.getItem('jwt')}, withCredentials: true}).then((success) => {
-            console.log('success logout : ', success);
-            localStorage.removeItem('jwt');
-            localStorage.removeItem('user');
-            dispatch(logUserOut());
-            history.push('/');
-        }).catch((err) => {
-            console.error('error logout : ', err);
-        });
+        console.log('success logout');
+        localStorage.removeItem('jwt');
+        dispatch(logUserOut());
+        history.push('/');
     }
 }
 

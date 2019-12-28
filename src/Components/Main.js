@@ -21,15 +21,6 @@ class App extends React.Component {
   logout() {
     this.props.startLogginUserOut(this.props.history);
   }
-
-  componentDidMount() {
-    console.log('current route : ', this.props.location.pathname);
-    let list = ['/login', '/', '/register'];
-
-    if (list.indexOf(this.props.location.pathname) === -1) {
-      this.props.getUserInSession();
-    }
-  }
   
   render() {
     // console.log('initial props : ', this.props);
