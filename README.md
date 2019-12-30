@@ -1,4 +1,4 @@
-# The Frontend for the organizer Application
+# The Frontend for the [Organizer Application]('https://the-organizer.herokuapp.com')
 
 <br>
 
