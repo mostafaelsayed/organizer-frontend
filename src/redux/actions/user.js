@@ -23,7 +23,7 @@ export function startLoggingUserIn(user) {
     return (dispatch) => {
         return axios.post(apiUrl + '/api/user/login', user).then((success) => {
             console.log('success logging user in : ', success);
-            localStorage.setItem('jwt', success.data.jwt);
+            localStorage.setItem('token', success.data.token);
             dispatch(logUserIn(success.data.user));
         }).catch((err) => {
             console.error('error logging user in : ', err);
@@ -38,12 +38,28 @@ export function logUserIn(user) {
     };
 }
 
-export function startLogginUserOut(history) {
+export function startLoggingUserInWithFacebook() {
     return (dispatch) => {
-        console.log('success logout');
-        localStorage.removeItem('jwt');
-        dispatch(logUserOut());
-        history.push('/');
+        return axios.get(apiUrl + '/login/facebook').then((success) => {
+            console.log('success logging user in with facebook : ', success);
+            localStorage.setItem('token', 'facebook_token');
+            window.location.href = success.data;
+        }).catch((err) => {
+            console.error('error logging user in : ', err);
+        });
+    };
+}
+
+export function startLoggingUserOut(history) {
+    return (dispatch) => {
+        return axios.get(apiUrl + '/api/user/logout', {headers: {authorization: localStorage.getItem('token')}, withCredentials: true}).then((success) => {
+            console.log('success logout : ', success);
+            localStorage.removeItem('token');
+            dispatch(logUserOut());
+            history.push('/');
+        }).catch((err) => {
+            console.error('error logout : ', err);
+        });
     }
 }
 

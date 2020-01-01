@@ -4,7 +4,7 @@ import axios from 'axios';
 
 export function startAddingReservation(reservation, userId, history) {
     return (dispatch) => {
-        return axios.post(apiUrl + '/api/reservation/add', {userId: userId, reservation: {name: reservation}}, {headers: {authorization: localStorage.getItem('jwt')}, withCredentials: true}).then((success) => {
+        return axios.post(apiUrl + '/api/reservation/add', {userId: userId, reservation: {name: reservation}}, {headers: {authorization: localStorage.getItem('token')}, withCredentials: true}).then((success) => {
             console.log('success adding reservation : ', success);
             dispatch(addReservation(reservation));
             history.push('/reservations');
@@ -17,11 +17,11 @@ export function startAddingReservation(reservation, userId, history) {
 export function startLoadingReservations() {
     return (dispatch) => {
         // why withCredentials to get session to work ??
-        return axios.get(apiUrl + '/api/reservation/getAll', {headers: {authorization: localStorage.getItem('jwt')}, withCredentials: true}).then((success) => {
+        return axios.get(apiUrl + '/api/reservation/getAll', {headers: {authorization: localStorage.getItem('token')}, withCredentials: true}).then((success) => {
             console.log('success load : ', success);
           
             if (success.data.message === 'Failed to authenticate token') {
-                localStorage.removeItem('jwt');
+                localStorage.removeItem('token');
                 dispatch(failToken(true));
             }
             else {
@@ -31,7 +31,7 @@ export function startLoadingReservations() {
         }).catch((err) => {
             console.log('error load reservations : ', err);
 
-            localStorage.removeItem('jwt');
+            localStorage.removeItem('token');
             dispatch(failToken(true));
         });
     };
@@ -39,11 +39,13 @@ export function startLoadingReservations() {
 
 export function startLoadingReservation(id) {
     return (dispatch) => {
-        return axios.get(apiUrl + `/api/reservation/get/${id}`, {headers: {authorization: localStorage.getItem('jwt')}, withCredentials: true}).then((success) => {
+        return axios.get(apiUrl + `/api/reservation/get/${id}`, {headers: {authorization: localStorage.getItem('token')}, withCredentials: true}).then((success) => {
             console.log('success get reservation : ', success);
             dispatch( loadReservation(success.data.reservation) );
         }).catch((err) => {
             console.log('error fetch one reservation : ', err);
+            localStorage.removeItem('token');
+            dispatch(failToken(true));
         })
     };
 }
@@ -51,7 +53,7 @@ export function startLoadingReservation(id) {
 
 export function startRemovingReservation(index, id) {
     return (dispatch) => {
-        return axios.post(apiUrl + '/api/reservation/delete', {reservationId: id}, {headers: {authorization: localStorage.getItem('jwt')}, withCredentials: true}).then((success) => {
+        return axios.post(apiUrl + '/api/reservation/delete', {reservationId: id}, {headers: {authorization: localStorage.getItem('token')}, withCredentials: true}).then((success) => {
             console.log('success delete reservation : ', success);
             dispatch(removeReservation(index));
         }).catch((err) => {

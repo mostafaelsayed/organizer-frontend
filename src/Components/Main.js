@@ -7,6 +7,8 @@ import { Route, Link, withRouter, Redirect } from 'react-router-dom';
 import ReservationDetails from './Reservation/ReservationDetails';
 import Login from './Login';
 import Register from './Register';
+import LoginSuccess from './LoginSuccess';
+import LoginForm from './LoginForm';
 
 
 
@@ -19,7 +21,7 @@ class App extends React.Component {
   }
 
   logout() {
-    this.props.startLogginUserOut(this.props.history);
+    this.props.startLoggingUserOut(this.props.history);
   }
   
   render() {
@@ -35,9 +37,9 @@ class App extends React.Component {
             <ul className="navbar-nav">
               <li className="nav-item active"><Link className="nav-link" to="/">Home</Link></li>
               <li className="nav-item active"><Link className="nav-link" to="/reservations">Your Reservations</Link></li>
-              {!localStorage.getItem('jwt') && <li className="nav-item"><Link className="nav-link" to="/register">Register</Link></li>}
-              {!localStorage.getItem('jwt') && <li className="nav-item"><Link className="nav-link" to="/login">Login</Link></li>}
-              {localStorage.getItem('jwt') && <li className="nav-item"><button className="btn btn-primary btn-sm" onClick={this.logout}>Logout</button></li>}
+              {!localStorage.getItem('token') && <li className="nav-item"><Link className="nav-link" to="/register">Register</Link></li>}
+              {!localStorage.getItem('token') && <li className="nav-item"><Link className="nav-link" to="/login">Login</Link></li>}
+              { (localStorage.getItem('token')) && <li className="nav-item"><button className="btn btn-primary btn-sm" onClick={this.logout}>Logout</button></li>}
             </ul>
           </div>
         </nav>
@@ -65,6 +67,14 @@ class App extends React.Component {
           
           <Route path="/add-reservation" render={(params) => (
             <AddReservation {...this.props} {...params} />
+          )}/>
+
+          <Route path="/login_form" render={(params) => (
+            <LoginForm {...this.props} {...params} />
+          )}/>
+
+          <Route path="/success_login" render={(params) => (
+            <LoginSuccess {...this.props} {...params} />
           )}/>
 
           <div>

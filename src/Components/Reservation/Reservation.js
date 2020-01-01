@@ -1,14 +1,17 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-function Reservation(props) {
+class Reservation extends React.Component {
 
-    return (<div key={props.index} index={props.index} className="reservation-container">
-        <li>{props.value.name}</li>
-        <Link to={`/reservation/${props.value.id}`}>Go</Link>
-        <button className="remove" onClick={props.startRemovingReservation.bind(this, props.index, props.value.id)}>Remove</button>
-    </div>);
+    render() {
+        return (<div>{this.props.failTokenStatus === false ? <div key={this.props.index} index={this.props.index} className="reservation-container">
+        <li>{this.props.value.name}</li>
+        <Link to={`/reservation/${this.props.value.id}`}>Go</Link>
+        <button className="remove" onClick={this.props.startRemovingReservation.bind(this, this.props.index, this.props.value.id)}>Remove</button>
+        </div> : <div><Redirect to="/login" /></div>}</div>
+    );
+    }
 }
 
 Reservation.propTypes = {
