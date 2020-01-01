@@ -5,6 +5,7 @@ import React from 'react';
 class LoginSuccess extends Component {
 
     componentDidMount() {
+        localStorage.setItem('token', 'facebook_token');
         if (window.location.hash && window.location.hash === '#_=_') {
             //window.location.hash = '';
             //window.location.href = window.location.href.substr(0, window.location.href.indexOf('#'));

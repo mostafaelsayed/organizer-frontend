@@ -42,7 +42,6 @@ export function startLoggingUserInWithFacebook() {
     return (dispatch) => {
         return axios.get(apiUrl + '/login/facebook').then((success) => {
             console.log('success logging user in with facebook : ', success);
-            localStorage.setItem('token', 'facebook_token');
             window.location.href = success.data;
         }).catch((err) => {
             console.error('error logging user in : ', err);
