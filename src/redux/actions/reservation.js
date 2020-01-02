@@ -9,7 +9,7 @@ export function startAddingReservation(reservation, userId, history) {
             dispatch(addReservation(reservation));
             history.push('/reservations');
         }).catch((err) => {
-            console.log('error add reservation to database : ', err);
+            console.error('error add reservation to database : ', err);
         });
     };
 }
@@ -20,16 +20,11 @@ export function startLoadingReservations() {
         return axios.get(apiUrl + '/api/reservation/getAll', {headers: {authorization: localStorage.getItem('token')}, withCredentials: true}).then((success) => {
             console.log('success load : ', success);
           
-            if (success.data.message === 'Failed to authenticate token') {
-                localStorage.removeItem('token');
-                dispatch(failToken(true));
-            }
-            else {
-                let reservations = success.data.reservations;
-                dispatch(loadReservations(reservations));
-            }
+            let reservations = success.data.reservations;
+            dispatch(loadReservations(reservations));
+
         }).catch((err) => {
-            console.log('error load reservations : ', err);
+            console.error('error load reservations : ', err);
 
             localStorage.removeItem('token');
             dispatch(failToken(true));
@@ -43,7 +38,7 @@ export function startLoadingReservation(id) {
             console.log('success get reservation : ', success);
             dispatch( loadReservation(success.data.reservation) );
         }).catch((err) => {
-            console.log('error fetch one reservation : ', err);
+            console.error('error fetch one reservation : ', err);
             localStorage.removeItem('token');
             dispatch(failToken(true));
         })
