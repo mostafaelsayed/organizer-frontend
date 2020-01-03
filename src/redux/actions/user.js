@@ -23,12 +23,13 @@ export function sendConfirmationMail(code) {
     })
 }
 
-export function startLoggingUserIn(user) {
+export function startLoggingUserIn(user, history) {
     return (dispatch) => {
         return axios.post(apiUrl + '/api/user/login', user).then((success) => {
             console.log('success logging user in : ', success);
             localStorage.setItem('token', success.data.token);
             dispatch(logUserIn());
+            history.push('/reservations');
         }).catch((err) => {
             console.error('error logging user in : ', err);
         });

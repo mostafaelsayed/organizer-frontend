@@ -14,7 +14,7 @@ class LoginForm extends Component {
         let email = event.target.elements.email.value;
         let password = event.target.elements.password.value;
 
-        this.props.startLoggingUserIn({email: email, password: password});
+        this.props.startLoggingUserIn({email: email, password: password}, this.props.history);
     }
 
     render() {
