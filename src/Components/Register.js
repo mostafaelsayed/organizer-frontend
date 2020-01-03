@@ -17,7 +17,7 @@ class Register extends React.Component {
             email: event.target.elements.email.value,
             phoneNumber: event.target.elements.phoneNumber.value,
             password: event.target.elements.password.value
-        });
+        }, this.props.history);
     }
 
     render() {

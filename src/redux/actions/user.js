@@ -1,24 +1,27 @@
 import {apiUrl} from '../../database/config';
 import axios from 'axios';
 
-export function startAddingUser(user) {
+export function startAddingUser(user, history) {
     return (dispatch) => {
         return axios.post(apiUrl + '/api/user/register', user).then((success) => {
             console.log('success adding user : ', success);
             localStorage.setItem('token', success.data.token);
             dispatch(logUserIn());
+            history.push('/reservations');
         }).catch((err) => {
             console.error('error adding user : ', err);
         });
     };
 }
 
-// export function addUser(user) {
-//     return {
-//         type: "ADD_USER",
-//         user: user
-//     };
-// }
+export function sendConfirmationMail(code) {
+    axios.get(apiUrl + '/mail_confirmed?code=' + code).then(() => {
+        console.log('success resend confirmation mail');
+        alert('confirmation mail sent');
+    }).catch((err) => {
+        console.error('error send confirmation mail : ', err);
+    })
+}
 
 export function startLoggingUserIn(user) {
     return (dispatch) => {
@@ -39,14 +42,12 @@ export function logUserIn() {
 }
 
 export function startLoggingUserInWithFacebook() {
-    return (dispatch) => {
-        return axios.get(apiUrl + '/login/facebook').then((success) => {
-            console.log('success logging user in with facebook : ', success);
-            window.location.href = success.data;
-        }).catch((err) => {
-            console.error('error logging user in : ', err);
-        });
-    };
+    return axios.get(apiUrl + '/login/facebook').then((success) => {
+        console.log('success logging user in with facebook : ', success);
+        window.location.href = success.data;
+    }).catch((err) => {
+        console.error('error logging user in : ', err);
+    });
 }
 
 export function startLoggingUserOut(history) {

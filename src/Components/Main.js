@@ -8,6 +8,7 @@ import Login from './Login';
 import Register from './Register';
 import LoginSuccess from './LoginSuccess';
 import LoginForm from './LoginForm';
+import SendConfirmationMail from './SendConfirmationMail';
 
 class App extends React.Component {
 
@@ -48,6 +49,10 @@ class App extends React.Component {
             <h1>Welcome</h1>
           )}/>
 
+          <Route exact path="/resend_confirmation_email" render={(params) => (
+            <SendConfirmationMail {...this.props} {...params} />
+          )}/>
+
           <Route exact path="/reservations" render={(params) => (
             // pass params in render to access location, match or history props
             <div className="App">
@@ -59,8 +64,8 @@ class App extends React.Component {
             <Login {...this.props} {...params} />
           )}/>
 
-          <Route path="/register" render={() => (
-            <Register {...this.props} />
+          <Route path="/register" render={(params) => (
+            <Register {...this.props} {...params} />
           )}/>
           
           <Route path="/add-reservation" render={(params) => (
