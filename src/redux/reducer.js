@@ -7,7 +7,7 @@ const reservationReducer = function({reservations = [], reservation = {}, failTo
         case 'ADD_RESERVATION': return {"reservations": [...reservations, {name: action.reservation, id: reservations.length > 0 ? reservations[reservations.length - 1].id + 1 : 0}], reservation, failTokenStatus, user}
         case 'LOAD_RESERVATIONS': return {"reservations": action.reservations, reservation, failTokenStatus, user}
         case 'LOAD_RESERVATION': return {reservations, "reservation": action.reservation, failTokenStatus, user}
-        case 'LOG_USER_IN' : return {reservations, reservation, "failTokenStatus": false, "user": action.user}
+        case 'LOG_USER_IN' : return {reservations, reservation, "failTokenStatus": false, user}
         case 'LOG_USER_OUT' : return {reservations, reservation, "failTokenStatus": true, user}
         case 'FAIL_TOKEN': return {reservations, reservation, user, "failTokenStatus": action.failTokenStatus}
         default: return {reservations, reservation, user, failTokenStatus};

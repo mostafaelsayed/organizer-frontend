@@ -5,36 +5,36 @@ export function startAddingUser(user) {
     return (dispatch) => {
         return axios.post(apiUrl + '/api/user/register', user).then((success) => {
             console.log('success adding user : ', success);
-            dispatch(addUser(success.data.user));
+            localStorage.setItem('token', success.data.token);
+            dispatch(logUserIn());
         }).catch((err) => {
             console.error('error adding user : ', err);
         });
     };
 }
 
-export function addUser(user) {
-    return {
-        type: "ADD_USER",
-        user: user
-    };
-}
+// export function addUser(user) {
+//     return {
+//         type: "ADD_USER",
+//         user: user
+//     };
+// }
 
 export function startLoggingUserIn(user) {
     return (dispatch) => {
         return axios.post(apiUrl + '/api/user/login', user).then((success) => {
             console.log('success logging user in : ', success);
             localStorage.setItem('token', success.data.token);
-            dispatch(logUserIn(success.data.user));
+            dispatch(logUserIn());
         }).catch((err) => {
             console.error('error logging user in : ', err);
         });
     };
 }
 
-export function logUserIn(user) {
+export function logUserIn() {
     return {
-        type: "LOG_USER_IN",
-        user
+        type: "LOG_USER_IN"
     };
 }
 

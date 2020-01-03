@@ -18,7 +18,7 @@ export function startLoadingReservations() {
     return (dispatch) => {
         // why withCredentials to get session to work ??
         return axios.get(apiUrl + '/api/reservation/getAll', {headers: {authorization: localStorage.getItem('token')}, withCredentials: true}).then((success) => {
-            console.log('success load : ', success);
+            console.log('success get all reservations : ', success);
           
             let reservations = success.data.reservations;
             dispatch(loadReservations(reservations));
