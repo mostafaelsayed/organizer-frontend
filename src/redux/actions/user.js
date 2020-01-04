@@ -15,7 +15,7 @@ export function startAddingUser(user, history) {
 }
 
 export function sendConfirmationMail(code) {
-    axios.get(apiUrl + '/mail_confirmed?code=' + code).then(() => {
+    axios.get(apiUrl + '/confirm_email?code=' + code).then(() => {
         console.log('success resend confirmation mail');
         alert('confirmation mail sent');
     }).catch((err) => {
