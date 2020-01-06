@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import Reservation from './Reservation';
 
 class Reservations extends React.Component {
@@ -18,19 +18,41 @@ class Reservations extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="reservations-table-container">
             {this.props.failTokenStatus === false ? 
-                <div>
-                    <h1>Reservations here come</h1>
-                    <ul className="reservation-list">
-                        <Link to="/add-reservation">add</Link>
-                        {this.props.reservations.map((e, index) => 
-                            <Reservation className="child-reservation" {...this.props} key={index} index={index} value={e} />
-                        )}
-                    </ul>
+                <div>                    
+                    <table className="reservations-table">
+                            <thead>
+                                <tr>
+                                    <th>Your Reservations</th>
+                                    <th>Time</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {this.props.reservations.map((e, index) => 
+                                    <tr key={index}>
+                                        <td>
+                                            <Reservation className="child-reservation"
+                                                {...this.props} key={index} index={index} value={e} />
+                                        </td>
+                                        <td>2020-01-05</td>
+                                        <td>
+                                        <button className="remove" onClick={this.props.startRemovingReservation.bind(this, index, e.id)}>Remove</button>
+                                        </td>
+                                    </tr>
+                                )}
+                            </tbody>
+                    </table>
                 </div>
                 : <div><Redirect to="/login" /></div>}
+
+                <br />
+
+                <Link to="/add-reservation">Add Reservation</Link>
             </div>
+
+            
         );
     }
 }

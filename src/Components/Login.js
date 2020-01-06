@@ -23,9 +23,9 @@ class Login extends Component {
     render() {
         return (
             <div>
-                <button className="btn btn-primary" onClick={this.loginUser}>Login with your email</button>
+                <button className="btn button" onClick={this.loginUser}>Login with your email</button>
                 &nbsp;&nbsp;
-                <button className="btn btn-primary" onClick={this.loginUserWithFacebook}>Login with Facebook</button>
+                <button className="btn button" onClick={this.loginUserWithFacebook}>Login with Facebook</button>
             </div>
         );
     }

@@ -5,11 +5,9 @@ import PropTypes from 'prop-types';
 class Reservation extends React.Component {
 
     render() {
-        return (<div>{this.props.failTokenStatus === false ? <div key={this.props.index} index={this.props.index} className="reservation-container">
-        <li>{this.props.value.name}</li>
-        <Link to={`/reservation/${this.props.value.id}`}>Go</Link>
-        <button className="remove" onClick={this.props.startRemovingReservation.bind(this, this.props.index, this.props.value.id)}>Remove</button>
-        </div> : <div><Redirect to="/login" /></div>}</div>
+        return (<span>{this.props.failTokenStatus === false ? <span key={this.props.index} index={this.props.index} className="reservation-container">
+        <Link className="reservation-name" to={`/reservation/${this.props.value.id}`}>{this.props.value.name}</Link>
+        </span> : <div><Redirect to="/login" /></div>}</span>
     );
     }
 }

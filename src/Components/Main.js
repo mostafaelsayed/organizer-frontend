@@ -38,7 +38,7 @@ class App extends React.Component {
               <li className="nav-item active"><Link className="nav-link" to="/reservations">Your Reservations</Link></li>
               {!localStorage.getItem('token') && <li className="nav-item"><Link className="nav-link" to="/register">Register</Link></li>}
               {!localStorage.getItem('token') && <li className="nav-item"><Link className="nav-link" to="/login">Login</Link></li>}
-              {localStorage.getItem('token') && <li className="nav-item"><button className="btn btn-primary btn-sm" onClick={this.logout}>Logout</button></li>}
+              {localStorage.getItem('token') && <li className="nav-item"><button className="nav-link logout-button" onClick={this.logout}>Logout</button></li>}
             </ul>
           </div>
 
@@ -55,7 +55,7 @@ class App extends React.Component {
 
           <Route exact path="/reservations" render={(params) => (
             // pass params in render to access location, match or history props
-            <div className="App">
+            <div className="app">
               <Reservations {...this.props} {...params} />
             </div>
           )}/>

@@ -26,7 +26,7 @@ class LoginForm extends Component {
                     <div><input type="password" name="password" placeholder="Enter Your Password ..." /></div>
                     <br /><br /><br />
 
-                    <button className="btn btn-primary" type="submit">Login</button>
+                    <button className="btn button" type="submit">Login</button>
 
                 </form>
             </div>

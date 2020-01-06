@@ -13,15 +13,70 @@ code {
 }
 
 .my-nav {
-  background-color: black;
+  background-color: #8E1DE8;
 }
 
 
 .my-nav a {
-  color: blue;
+  color: white;
+}
+
+.logout-button {
+  background-color: transparent;
+  border: none;
+  color: white;
 }
 
 #app-container {
   margin-top: 1em;
   margin-left: 1em;
+}
+
+.app {
+  width: 100%;
+}
+
+/* .reservations-table th, .reservations-table td {
+  border: 1px solid black;
+} */
+
+.reservations-table {
+  border-color: #8E1DE8;
+}
+
+.button {
+  background-color: #8E1DE8;
+  color: white;
+}
+
+.reservations-table {
+  background-color: #8E1DE8;
+  color: white;
+  border-radius: 0.5em;
+  /* border-color: solid #8E1DE8; */
+  /* border-collapse: separate; */
+  /* border-spacing: 1.5em 1.5em; */
+}
+
+.reservations-table-container {
+  margin: 0 auto;
+  /* width: 80em; */
+}
+
+.reservations-table th, .reservations-table td {
+  padding: 1.5em;
+}
+
+.remove {
+  background-color: transparent;
+  border: none;
+  color: white;
+}
+
+.reservation-name {
+  color: white;
+}
+
+.reservation-name:hover {
+  color: white;
 }
