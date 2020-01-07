@@ -4,7 +4,13 @@
 
 ## Changelog
 
+### Done
+
+* redirect to reservations page after login
+
+### Not Done
+
 * styling of home page
 * styling of reservations page
 * styling of one reservation page
-* redirect to reservations page after login
+* update the testing cases to cover 90% of the cases
