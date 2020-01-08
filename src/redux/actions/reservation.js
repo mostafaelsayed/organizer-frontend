@@ -4,14 +4,21 @@ import axios from 'axios';
 
 export function startAddingReservation(reservation, userId, history) {
     return (dispatch) => {
-        return axios.post(apiUrl + '/api/reservation/add', {userId: userId, reservation: {name: reservation}}, {headers: {authorization: localStorage.getItem('token')}, withCredentials: true}).then((success) => {
+        return axios.post(apiUrl + '/api/reservation/add', {userId: userId, reservation: {name: reservation.name, reservationDate: reservation.reservationDate}}, {headers: {authorization: localStorage.getItem('token')}, withCredentials: true}).then((success) => {
             console.log('success adding reservation : ', success);
-            dispatch(addReservation(reservation));
+            dispatch(addReservation(reservation.name));
             history.push('/reservations');
         }).catch((err) => {
             console.error('error add reservation to database : ', err);
         });
     };
+}
+
+export function selectDate(reservationDate) {
+    return {
+        "type": "SELECT_DATE",
+        reservationDate
+    }
 }
 
 export function startLoadingReservations() {

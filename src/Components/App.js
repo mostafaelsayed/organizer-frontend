@@ -10,7 +10,8 @@ function mapStateToProps(state) {
         reservations: state.reservations,
         reservation: state.reservation,
         "user": state.user,
-        "failTokenStatus": state.failTokenStatus
+        "failTokenStatus": state.failTokenStatus,
+        "reservationDate": state.reservationDate
     }
 }
 

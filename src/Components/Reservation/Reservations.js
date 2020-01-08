@@ -36,7 +36,7 @@ class Reservations extends React.Component {
                                             <Reservation className="child-reservation"
                                                 {...this.props} key={index} index={index} value={e} />
                                         </td>
-                                        <td>2020-01-05</td>
+                                        <td>{e.reservationDate} at {e.reservationTime}</td>
                                         <td>
                                         <button className="remove" onClick={this.props.startRemovingReservation.bind(this, index, e.id)}>Remove</button>
                                         </td>
