@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #93C1B9;
 }
 
 code {
@@ -13,7 +14,7 @@ code {
 }
 
 .my-nav {
-  background-color: #8E1DE8;
+  background-color: #508F83;
 }
 
 
@@ -30,6 +31,7 @@ code {
 #app-container {
   margin-top: 1em;
   margin-left: 1em;
+  
 }
 
 .app {
@@ -40,22 +42,28 @@ code {
   border: 1px solid black;
 } */
 
-.reservations-table {
-  border-color: #8E1DE8;
-}
-
 .button {
-  background-color: #8E1DE8;
+  background-color: lightgrey;
   color: white;
 }
 
+.footer-link {
+  display: inline-block;
+  margin-left: 1em;
+  color: blue;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0.5em;
+  left: 50%;
+  
+}
+
 .reservations-table {
-  background-color: #8E1DE8;
   color: white;
   border-radius: 0.5em;
-  /* border-color: solid #8E1DE8; */
-  /* border-collapse: separate; */
-  /* border-spacing: 1.5em 1.5em; */
+  background-color: #508F83;
 }
 
 .reservations-table-container {

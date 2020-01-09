@@ -49,7 +49,7 @@ class Reservations extends React.Component {
 
                 <br />
 
-                <Link to="/add-reservation">Add Reservation</Link>
+                <Link to="/add-reservation" style={{color: 'blue'}}>Add Reservation</Link>
             </div>
 
             

@@ -15,12 +15,14 @@ export function startAddingUser(user, history) {
 }
 
 export function sendConfirmationMail(code) {
-    axios.get(apiUrl + '/confirm_email?code=' + code).then(() => {
-        console.log('success resend confirmation mail');
-        alert('confirmation mail sent');
-    }).catch((err) => {
-        console.error('error send confirmation mail : ', err);
-    })
+    return () => {
+        return axios.get(apiUrl + '/confirm_email?code=' + code).then(() => {
+            console.log('success resend confirmation mail');
+            alert('confirmation mail sent');
+        }).catch((err) => {
+            console.error('error send confirmation mail : ', err);
+        });
+    };
 }
 
 export function startLoggingUserIn(user, history) {
@@ -43,12 +45,14 @@ export function logUserIn() {
 }
 
 export function startLoggingUserInWithFacebook() {
-    return axios.get(apiUrl + '/login/facebook').then((success) => {
-        console.log('success logging user in with facebook : ', success);
-        window.location.href = success.data;
-    }).catch((err) => {
-        console.error('error logging user in : ', err);
-    });
+    return () => {
+        return axios.get(apiUrl + '/login/facebook').then((success) => {
+            console.log('success logging user in with facebook : ', success);
+            window.location.href = success.data;
+        }).catch((err) => {
+            console.error('error logging user in : ', err);
+        });
+    };
 }
 
 export function startLoggingUserOut(history) {
@@ -61,11 +65,11 @@ export function startLoggingUserOut(history) {
         }).catch((err) => {
             console.error('error logout : ', err);
         });
-    }
+    };
 }
 
 export function logUserOut() {
     return {
         type: 'LOG_USER_OUT'
-    }
+    };
 }

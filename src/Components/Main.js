@@ -9,6 +9,9 @@ import Register from './Register';
 import LoginSuccess from './LoginSuccess';
 import LoginForm from './LoginForm';
 import SendConfirmationMail from './SendConfirmationMail';
+import Footer from './Footer';
+import ContactUs from './ContactUs';
+import Help from './Help';
 
 class App extends React.Component {
 
@@ -46,7 +49,7 @@ class App extends React.Component {
 
         <div id="app-container">
           <Route exact path="/" render={() => (
-            <h1>Welcome</h1>
+            <h1 style={{color: 'white'}}>Welcome</h1>
           )}/>
 
           <Route exact path="/resend_confirmation_email" render={(params) => (
@@ -80,6 +83,14 @@ class App extends React.Component {
             <LoginSuccess {...this.props} {...params} />
           )}/>
 
+          <Route path="/contact-us" render={() => (
+            <ContactUs />
+          )}/>
+
+          <Route path="/help" render={() => (
+            <Help />
+          )}/>
+
           <div>
             {
             this.props.failTokenStatus === false ?
@@ -90,6 +101,10 @@ class App extends React.Component {
               : <Redirect to="/login" />
             }
           </div>
+        </div>
+        
+        <div className="footer">
+          <Footer />
         </div>
         
       </div>

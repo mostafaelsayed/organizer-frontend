@@ -4,7 +4,7 @@
 
 ## Changelog
 
-* styling of home page
-* styling of reservations page
+* edit reservation
 * styling of one reservation page
-* update the testing cases to cover 90% of the cases
+* styling of add reservation page
+* update the test cases to cover 90%

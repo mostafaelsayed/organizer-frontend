@@ -38,7 +38,7 @@ class Register extends React.Component {
                     <div><input type="password" name="confirmPassword" placeholder="Confirm Your Password ..." /></div>
                     <br /><br /><br />
 
-                    <button className="btn button" type="submit">Register</button>{/*// should add type="submit" to reflect any model changes }*/}
+                    <button className="btn btn-info" type="submit">Register</button>{/*// should add type="submit" to reflect any model changes }*/}
 
                 </form>
             </div>
