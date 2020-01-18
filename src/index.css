@@ -47,6 +47,15 @@ code {
   color: white;
 }
 
+.reservation-details {
+  color: white;
+}
+
+.reservation-details-headline {
+  width: 20%;
+  border-bottom: 0.1em solid black;
+}
+
 .footer-link {
   display: inline-block;
   margin-left: 1em;

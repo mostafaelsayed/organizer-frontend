@@ -21,6 +21,13 @@ export function selectDate(reservationDate) {
     }
 }
 
+export function clickEdit(clickedOrNot) {
+    return {
+        type: "CLICK_EDIT",
+        clickedOrNot
+    };
+}
+
 export function startLoadingReservations() {
     return (dispatch) => {
         // why withCredentials to get session to work ??

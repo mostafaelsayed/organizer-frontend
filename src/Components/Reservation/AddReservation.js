@@ -9,7 +9,7 @@ class AddReservation extends React.Component {
         super();
 
         this.addReservation = this.addReservation.bind(this);
-        this.handleChange = this.handleChange.bind(this);
+        this.handleDateChange = this.handleDateChange.bind(this);
     }
 
     addReservation(event) {
@@ -20,7 +20,7 @@ class AddReservation extends React.Component {
         this.props.startAddingReservation(reservation, this.props.user.id, this.props.history);
     }
 
-    handleChange = reservationDate => {
+    handleDateChange = reservationDate => {
         console.log('handle date change : ', reservationDate);
         this.props.selectDate(reservationDate);
     };
@@ -39,8 +39,9 @@ class AddReservation extends React.Component {
                         <DatePicker
                             name="reservationDate"
                             selected={this.props.reservationDate}
-                            onChange={this.handleChange}
+                            onChange={this.handleDateChange}
                             showTimeSelect
+                            // timeFormat="HH:MM"
                             dateFormat="Pp"
                         />
                         <button className="add-reservation">Add</button>
