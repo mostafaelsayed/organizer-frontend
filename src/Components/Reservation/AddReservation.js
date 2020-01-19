@@ -14,7 +14,7 @@ class AddReservation extends React.Component {
 
     addReservation(event) {
         event.preventDefault();
-        const reservation = {name: event.target.elements.reservation.value, reservationDate: event.target.elements.reservationDate.value};
+        const reservation = {name: event.target.elements.reservationName.value, reservationDate: event.target.elements.reservationDate.value};
         console.log('reservation to add : ', reservation);
 
         this.props.startAddingReservation(reservation, this.props.user.id, this.props.history);
@@ -35,7 +35,7 @@ class AddReservation extends React.Component {
             {this.props.failTokenStatus === false ? 
                 <div>
                     <form className="reservation-form" onSubmit={this.addReservation}>
-                        <input name="reservation" placeholder="add reservation description" type="text" />
+                        <input name="reservationName" placeholder="add reservation description" type="text" />
                         <DatePicker
                             name="reservationDate"
                             selected={this.props.reservationDate}
