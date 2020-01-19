@@ -7,12 +7,12 @@ import * as actions from '../redux/actions/index';
 
 function mapStateToProps(state) {
     return {
-        reservations: state.reservations,
-        reservation: state.reservation,
-        "user": state.user,
-        "failTokenStatus": state.failTokenStatus,
-        "reservationDate": state.reservationDate,
-        "editClicked": state.editClicked
+        reservations: state.reservationState.reservations,
+        reservation: state.reservationState.reservation,
+        user: state.userState.user,
+        failTokenStatus: state.userState.failTokenStatus,
+        reservationDate: state.reservationState.reservationDate,
+        editClicked: state.reservationState.editClicked
     }
 }
 

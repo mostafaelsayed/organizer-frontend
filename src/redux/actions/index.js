@@ -1,2 +1,2 @@
-export * from './user';
-export * from './reservation';
+export * from './user-action';
+export * from './reservation-action';
