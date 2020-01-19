@@ -11,7 +11,7 @@ const reservationReducer = function({reservations = [], reservation = {}, failTo
         case 'LOG_USER_OUT' : return {reservations, reservation, "failTokenStatus": true, user, reservationDate, editClicked}
         case 'FAIL_TOKEN': return {reservations, reservation, user, "failTokenStatus": action.failTokenStatus, reservationDate, editClicked}
         case 'SELECT_DATE': return {reservations, reservation, user, failTokenStatus, reservationDate: action.reservationDate, editClicked}
-        case 'CLICK_EDIT': return {reservations, reservation, user, failTokenStatus, reservationDate: action.reservationDate, editClicked: action.clickedOrNot}
+        case 'EDIT_CLICKED': return {reservations, reservation, user, failTokenStatus, reservationDate, editClicked: action.editClicked}
         default: return {reservations, reservation, user, failTokenStatus, reservationDate, editClicked};
     }
 };

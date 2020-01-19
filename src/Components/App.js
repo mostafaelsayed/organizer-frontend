@@ -11,7 +11,8 @@ function mapStateToProps(state) {
         reservation: state.reservation,
         "user": state.user,
         "failTokenStatus": state.failTokenStatus,
-        "reservationDate": state.reservationDate
+        "reservationDate": state.reservationDate,
+        "editClicked": state.editClicked
     }
 }
 

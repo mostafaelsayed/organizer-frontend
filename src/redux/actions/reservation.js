@@ -14,6 +14,18 @@ export function startAddingReservation(reservation, userId, history) {
     };
 }
 
+export function startEditingReservation(reservation, userId, history) {
+    return () => {
+        return axios.post(apiUrl + '/api/reservation/edit/' + reservation.id, {userId: userId, reservation: {name: reservation.name, reservationDate: reservation.reservationDate}}, {headers: {authorization: localStorage.getItem('token')}, withCredentials: true}).then((success) => {
+            console.log('success editing reservation : ', success);
+            //dispatch(addReservation(reservation.name));
+            history.push('/reservations');
+        }).catch((err) => {
+            console.error('error edit reservation in database : ', err);
+        });
+    };
+}
+
 export function selectDate(reservationDate) {
     return {
         "type": "SELECT_DATE",
@@ -21,10 +33,10 @@ export function selectDate(reservationDate) {
     }
 }
 
-export function clickEdit(clickedOrNot) {
+export function clickEdit(editClicked) {
     return {
-        type: "CLICK_EDIT",
-        clickedOrNot
+        "type": "EDIT_CLICKED",
+        editClicked
     };
 }
 

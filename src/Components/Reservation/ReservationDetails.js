@@ -8,22 +8,41 @@ class ReservationDetails extends React.Component {
 
     constructor() {
         super();
-        //this.editClicked = false;
-        this.clickEdit = this.clickEdit.bind(this);
+
+        this.handlechange = false;
+
+        //this.clickEdit = this.clickEdit.bind(this);
+        this.saveEditReservation = this.saveEditReservation.bind(this);
     }
 
-    clickEdit() {
-        //this.editClicked = true;
-        this.props.clickEdit(true);
+    clickEdit = () => {
+        // console.log(this.props.editClicked);
+        // // toggle edit button
+        // this.props.editClicked = !this.props.editClicked;
+        // console.log(this.props.editClicked);
+
+        this.props.clickEdit(!this.props.editClicked);
     }
 
     saveEditReservation() {
+        //event.preventDefault();
+        let reservationDate = document.getElementById('res-date').value;
+        let name = document.getElementById('res-name').value;
 
+        console.log('reservationDate edited : ', reservationDate);
+        console.log('name edited : ', name);
+
+        const reservation = {name, reservationDate, id: this.props.reservation.id};
+        console.log('reservation to edit : ', reservation);
+
+        this.props.startEditingReservation(reservation, this.props.user.id, this.props.history);
     }
 
     handleDateChange = reservationDate => {
+        
         console.log('handle date change : ', reservationDate);
         this.props.selectDate(reservationDate);
+        this.handlechange = true;
     };
 
     componentDidMount() {
@@ -31,9 +50,10 @@ class ReservationDetails extends React.Component {
         this.props.startLoadingReservation(this.props.match.params.id);
     }
 
-    // componentWillUnmount() {
-    //     this.props.selectDate(new Date());
-    // }
+    componentWillUnmount() {
+        this.handlechange = false;
+        this.props.clickEdit(false);
+    }
 
     render() {
         return (
@@ -42,19 +62,28 @@ class ReservationDetails extends React.Component {
                 <br />
                 {this.props.reservation.reservationTime &&
                     <div>
-                        <div>Name : <span className="reservation-detail-name">{ this.props.editClicked === false ? this.props.reservation.name : <input type="text" name="name" /> }</span></div>
-                        <div>Time : <span className="reservation-detail-date">{ this.props.editClicked === false ? this.props.reservation.reservationDate : <DatePicker name="reservationDate"
-                        selected={new Date(moment(this.props.reservation.reservationDate + ' ' + this.props.reservation.reservationTime, 'YYYY-MM-DD HH:mm'))}
-                        //selected={this.props.reservation.reservationDate + ', ' + this.props.reservation.reservationTime}
-                        //selected={new Date()}
-                        onChange={this.handleDateChange}
-                        showTimeSelect
-                        // timeFormat="HH:MM"
-                        dateFormat="Pp"/> }</span></div>
+                        <div>Name : <span className="reservation-detail-name">{ this.props.editClicked === false ? this.props.reservation.name : <input id="res-name" type="text" name="name" defaultValue={this.props.reservation.name} /> }</span></div>
+                        <div>Time : <span className="reservation-detail-date">{ this.props.editClicked === false ? this.props.reservation.reservationDate + ' at ' + this.props.reservation.reservationTime : <DatePicker id="res-date" name="reservationDate"
+                            selected={this.handlechange === false ? new Date(moment(this.props.reservation.reservationDate + ' ' + this.props.reservation.reservationTime, 'YYYY-MM-DD HH:mm')) : this.props.reservationDate}
+                            onChange={this.handleDateChange}
+                            showTimeSelect
+                            // timeFormat="HH:MM"
+                            dateFormat="Pp"/> }</span>
+                        </div>
+
+                        <div style={{marginTop: '0.5em'}}>
+                            <button style={{marginRight: '0.5em'}} className="btn btn-info" onClick={this.clickEdit}> {this.props.editClicked === false ? 'Edit' : 'Close'}</button>
+
+
+                            {this.props.editClicked === true && <button className="btn btn-info" onClick={this.saveEditReservation}>Save</button>}
+                        
+
+                            
+                        </div>
                     </div>
                 }
 
-                <button className="btn btn-info" onClick={this.clickEdit}>Edit</button>
+                
             </div>
         );
     }

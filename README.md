@@ -4,7 +4,7 @@
 
 ## Changelog
 
-* edit reservation
+* separate reducers
 * styling of one reservation page
 * styling of add reservation page
 * update the test cases to cover 90%
