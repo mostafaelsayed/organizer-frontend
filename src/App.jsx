@@ -1,9 +1,9 @@
 import './App.css'
-import GetAllUsers from './components/user/GetAllUsers'
+import Home from './components/Home';
 
 function App() {
   return (
-    <GetAllUsers></GetAllUsers>
+    <Home></Home>
   );
   
 }
