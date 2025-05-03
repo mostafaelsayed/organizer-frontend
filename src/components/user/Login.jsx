@@ -1,8 +1,14 @@
 import { useNavigate } from 'react-router';
 import { login } from '../../api/user';
 import { useEffect, useState } from 'react';
-export default function Login(props) {
-    const [loggedIn, setLoggedIn] = useState(JSON.parse(localStorage.getItem('userData')).id !== undefined);
+export default function Login() {
+    const navigate = useNavigate();
+    const [loggedIn, setLoggedIn] = useState(localStorage.getItem('userData'));
+    useEffect(() => {
+        if (loggedIn) {
+            navigate("/profile");
+        }
+    });
     async function handleLogin(e) {
         e.preventDefault();
         const email = document.getElementById('login-email').value;
@@ -23,12 +29,5 @@ export default function Login(props) {
                 <button onClick={handleLogin}></button>
             </form>
         );
-    }
-    else {
-        let navigate = useNavigate();
-
-        useEffect(() => {
-            navigate("/profile");
-        });
     }
 }

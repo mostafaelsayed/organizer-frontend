@@ -1,0 +1,10 @@
+.top-menu:not(.top-menu-item) {
+    position: absolute;
+    top: 0%;
+    width: 100%;
+    left: 0%;
+}
+
+.top-menu-item:not(.top-menu-first) {
+    margin-left: 5%;
+}

@@ -17,7 +17,7 @@ export async function getAllUsersApi() {
 export async function login(email: string, password: string) {
     let requestOptions: RequestOptions = new RequestOptions(
         {'Content-Type': 'application/json', 'Accept': 'application/json'},
-        JSON.stringify({"query": `{loginUser(email: \"${email}\", password: \"${password}\"){_data{id, jwt, firstName, updatedAt, reservations{id, name, createdAt}}, _statusCode}}`})
+        JSON.stringify({"query": `{loginUser(email: \"${email}\", password: \"${password}\"){_data{id, jwt, firstName, updatedAt, reservations{id, name, createdAt, updatedAt, reservationTime}}, _statusCode}}`})
     );
     let response: ApiResponse = await sendRequest(import.meta.env.VITE_SERVER_URL, 'POST', requestOptions);
     console.log(response);
