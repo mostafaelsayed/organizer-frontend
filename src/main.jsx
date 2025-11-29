@@ -8,9 +8,11 @@ import {
   Routes,
 } from "react-router";
 import Login from './components/user/Login.jsx';
+import Signup from './components/user/Signup.jsx';
 import Profile from './components/user/Profile.jsx';
 import TopMenu from './components/TopMenu.jsx';
 import Home from './components/Home.jsx';
+import DeleteUser from './components/user/DeleteUser.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -20,6 +22,8 @@ createRoot(document.getElementById('root')).render(
         <Route exact path="/" element={<App/>}/>
         <Route exact path="/home" element={<Home/>}/>
         <Route exact path="/profile" element={<Profile/>}/>
+        <Route exact path="/deleteuser" element={<DeleteUser/>}/>
+        <Route exact path="/signup" element={<Signup/>}/>
         <Route exact path="/login" element={<Login/>}/>
       </Routes>
     </BrowserRouter>

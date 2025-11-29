@@ -25,3 +25,27 @@ export async function login(email: string, password: string) {
     
     return data;
 }
+
+export async function signup(email: string, firstName: string, lastName: string, phoneNumber: string, password: string) {
+    let requestOptions: RequestOptions = new RequestOptions(
+        {'Content-Type': 'application/json', 'Accept': 'application/json'},
+        JSON.stringify({"query": `{registerUser(email: \"${email}\", firstName: \"${firstName}\", lastName: \"${lastName}\", phoneNumber: \"${phoneNumber}\", password: \"${password}\"){_data{id, jwt, firstName, updatedAt, reservations{id, name, createdAt, updatedAt, reservationTime}}, _statusCode}}`})
+    );
+    let response: ApiResponse = await sendRequest(import.meta.env.VITE_SERVER_URL, 'POST', requestOptions);
+    console.log(response);
+    const data = response.data.loginUser;
+    
+    return data;
+}
+
+export async function deleteUser(email: string) {
+    let requestOptions: RequestOptions = new RequestOptions(
+        {'Content-Type': 'application/json', 'Accept': 'application/json'},
+        JSON.stringify({"query": `{deleteUser(email: \"${email}\"){_data{id, jwt, firstName, updatedAt, reservations{id, name, createdAt, updatedAt, reservationTime}}, _statusCode}}`})
+    );
+    let response: ApiResponse = await sendRequest(import.meta.env.VITE_SERVER_URL, 'POST', requestOptions);
+    console.log(response);
+    const data = response.data.loginUser;
+    
+    return data;
+}
