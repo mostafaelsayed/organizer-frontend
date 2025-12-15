@@ -3,7 +3,12 @@ import { useNavigate } from "react-router";
 
 export default function Profile() {
     const navigate = useNavigate();
-    
+    const [loggedIn, setLoggedIn] = useState(localStorage.getItem('jwt'));
+    useEffect(() => {
+        if (!loggedIn) {
+            navigate("/login");
+        }
+    });
     const [userData, setUserData] = useState(localStorage.getItem('userData') && JSON.parse(localStorage.getItem('userData')));
 
     async function getReservationDetails(reservation) {

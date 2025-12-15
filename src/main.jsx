@@ -13,6 +13,7 @@ import Profile from './components/user/Profile.jsx';
 import TopMenu from './components/TopMenu.jsx';
 import Home from './components/Home.jsx';
 import DeleteUser from './components/user/DeleteUser.jsx';
+import CreateReservation from './components/reservation/CreateReservation.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -22,6 +23,7 @@ createRoot(document.getElementById('root')).render(
         <Route exact path="/" element={<App/>}/>
         <Route exact path="/home" element={<Home/>}/>
         <Route exact path="/profile" element={<Profile/>}/>
+        <Route exact path="/createreservation" element={<CreateReservation/>}/>
         <Route exact path="/deleteuser" element={<DeleteUser/>}/>
         <Route exact path="/signup" element={<Signup/>}/>
         <Route exact path="/login" element={<Login/>}/>

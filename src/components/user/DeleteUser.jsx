@@ -3,10 +3,10 @@ import { deleteUser } from '../../api/user';
 import { useEffect, useState } from 'react';
 export default function DeleteUser() {
     const navigate = useNavigate();
-    const [loggedIn, setLoggedIn] = useState(localStorage.getItem('userData'));
+    const [loggedIn, setLoggedIn] = useState(localStorage.getItem('jwt'));
     useEffect(() => {
-        if (loggedIn) {
-            navigate("/profile");
+        if (!loggedIn) {
+            navigate("/login");
         }
     });
     async function handleDelete(e) {
@@ -23,7 +23,7 @@ export default function DeleteUser() {
     return (
         <form id='delete'>
             <input type='text' id='delete-email' placeholder='Enter email' />
-            <button onClick={handleDelete}></button>
+            <button onClick={handleDelete}>Delete</button>
         </form>
     );
 }

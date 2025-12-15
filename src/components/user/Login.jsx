@@ -1,14 +1,7 @@
 import { useNavigate } from 'react-router';
 import { login } from '../../api/user';
 import { useEffect, useState } from 'react';
-export default function Login() {
-    const navigate = useNavigate();
-    const [loggedIn, setLoggedIn] = useState(localStorage.getItem('userData'));
-    useEffect(() => {
-        if (loggedIn) {
-            navigate("/profile");
-        }
-    });
+export default function Login() {    
     async function handleLogin(e) {
         e.preventDefault();
         const email = document.getElementById('login-email').value;
@@ -18,16 +11,14 @@ export default function Login() {
         if (response._data.id) {
             alert('login succeeded');
             localStorage.setItem('userData', JSON.stringify(response._data));
-            setLoggedIn(true);
+            localStorage.setItem('jwt', response._data.jwt);
         }
     }
-    if (!loggedIn) { 
-        return (
-            <form id='login'>
-                <input type='text' id='login-email' placeholder='Enter your email' />
-                <input type='password' id='login-password' placeholder='Enter your password' />
-                <button onClick={handleLogin}></button>
-            </form>
-        );
-    }
+    return (
+        <form id='login'>
+            <input type='text' id='login-email' placeholder='Enter your email' />
+            <input type='password' id='login-password' placeholder='Enter your password' />
+            <button onClick={handleLogin}>Login</button>
+        </form>
+    );
 }

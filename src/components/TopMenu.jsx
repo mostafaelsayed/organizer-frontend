@@ -13,6 +13,7 @@ export default function TopMenu() {
                 <a className="top-menu-item" href="/signup">Signup</a>
                 <a className="top-menu-item" href="/login">Login</a>
                 <a className="top-menu-item"href="/profile">Profile</a>
+                <a className="top-menu-item"href="/createreservation">Create Reservation</a>
                 <a className="top-menu-item"href="/deleteuser">Delete User</a>
                 <button type="button" className="top-menu-item" onClick={logout}>Logout</button>
             </div>

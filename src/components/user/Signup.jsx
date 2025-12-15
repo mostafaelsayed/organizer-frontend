@@ -1,14 +1,5 @@
-import { useNavigate } from 'react-router';
 import { signup } from '../../api/user';
-import { useEffect, useState } from 'react';
-export default function Signup() {
-    const navigate = useNavigate();
-    const [loggedIn, setLoggedIn] = useState(localStorage.getItem('userData'));
-    useEffect(() => {
-        if (loggedIn) {
-            navigate("/profile");
-        }
-    });
+export default function Signup() {   
     async function handleSignup(e) {
         e.preventDefault();
         const email = document.getElementById('signup-email').value;
@@ -24,16 +15,14 @@ export default function Signup() {
             setLoggedIn(true);
         }
     }
-    if (!loggedIn) { 
-        return (
-            <form id='signup'>
-                <input type='text' id='signup-email' placeholder='Enter your email' />
-                <input type='text' id='signup-first' placeholder='Enter your first name' />
-                <input type='text' id='signup-last' placeholder='Enter your last name' />
-                <input type='text' id='signup-phone' placeholder='Enter your phone number' />
-                <input type='password' id='signup-password' placeholder='Enter your password' />
-                <button onClick={handleSignup}></button>
-            </form>
-        );
-    }
+    return (
+        <form id='signup'>
+            <input type='text' id='signup-email' placeholder='Enter your email' />
+            <input type='text' id='signup-first' placeholder='Enter your first name' />
+            <input type='text' id='signup-last' placeholder='Enter your last name' />
+            <input type='text' id='signup-phone' placeholder='Enter your phone number' />
+            <input type='password' id='signup-password' placeholder='Enter your password' />
+            <button onClick={handleSignup}>Signup</button>
+        </form>
+    );
 }
