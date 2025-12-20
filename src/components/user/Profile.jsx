@@ -1,37 +1,53 @@
 import { useEffect, useState } from "react"
+import { getUserReservations } from '../../api/user';
+import Login from "./Login";
 import { useNavigate } from "react-router";
 
 export default function Profile() {
-    const navigate = useNavigate();
-    const [loggedIn, setLoggedIn] = useState(localStorage.getItem('jwt'));
-    useEffect(() => {
-        if (!loggedIn) {
-            navigate("/login");
-        }
-    });
-    const [userData, setUserData] = useState(localStorage.getItem('userData') && JSON.parse(localStorage.getItem('userData')));
 
-    async function getReservationDetails(reservation) {
-        console.log('the reservation: ', reservation);
-        const newUserData = JSON.parse(JSON.stringify(userData));
-        newUserData.reservations.forEach(elem => {
-            if (elem.id == reservation.id) {
-                elem['detailsDisplayed'] = !elem['detailsDisplayed'];
-            }
-        })
-        setUserData(newUserData);
+    const [userReservations, setUserReservations] = useState(undefined);
+    const [notAuthenticated, setNotAuthenticated] = useState(undefined);
+    const navigate = useNavigate();
+
+    async function initPage() {
+        const data = await getUserReservations();
+        setUserReservations(data);
+        if (!data || !data.user) {
+            setNotAuthenticated(true);
+        }
+        else {
+            setNotAuthenticated(false);
+        }
     }
-   
-    if (userData) {
-        return (
-            <>
-                <h1>Hello {userData.firstName}</h1>
-                <h2>Below are your reservations:</h2>
-                <ul>
-                    {userData.reservations.map(reservation => {
-                        return (
-                            <div key={reservation.id}>
-                                
+
+    useEffect(() => {
+        initPage();
+    }, []);
+
+    async function getReservationDetails(data, reservation) {
+        console.log('the reservation: ', reservation);
+        reservation['detailsDisplayed'] = !reservation['detailsDisplayed'];
+        const reservs = data.reservations.slice();
+        const ind = reservs.findIndex(e => {
+            return e.id == reservation.id;
+        });
+        reservs[ind] = reservation;
+        const newReserv = { user: data.user, reservations: reservs };
+        setUserReservations(newReserv);
+    }
+
+    function Profile({ data }) {
+        console.log('user REser: ', data);
+        if (data?.user) {
+            return (<>
+                <div>
+                    <h1>Hello {data.user.firstName}</h1>
+                    <h2>Below are your reservations:</h2>
+                    <ul>
+                        {data.reservations?.map(reservation => {
+                            return (
+                                <div key={reservation.id}>
+
                                     {reservation.detailsDisplayed &&
                                         (
                                             <div className="tooltip">
@@ -40,23 +56,29 @@ export default function Profile() {
                                             </div>
                                         )
                                     }
-                                
 
-                                <li style={{"textAlign": "left"}}>
-                                    {reservation.name} <button onClick={() => getReservationDetails(reservation)}>Click for details</button>
-                                </li>
-                            </div>
-                        )
-                    })}
-                </ul>
+
+                                    <li style={{ "textAlign": "left" }}>
+                                        {reservation.name} <button onClick={() => getReservationDetails(data, reservation)}>Click for details</button>
+                                    </li>
+                                </div>
+                            )
+                        })}
+                    </ul>
+                </div>
             </>
-        )
-    }
-    else {
-        useEffect(() => {
-            navigate('/login');
-        });
+            )
+        }
+        else if (notAuthenticated === true) {
+            useEffect(() => {
+                navigate('/login');
+            });
+        }
     }
 
-    
+    return (
+        <Profile data={userReservations} />
+    )
+
+
 }

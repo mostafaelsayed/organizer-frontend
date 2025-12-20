@@ -16,7 +16,7 @@ export default function CreateReservation() {
         const description = document.getElementById('reservation-description').value;
 
         const response = await createReservation(name, description);
-        console.log(' response: ', response);
+        console.log('response: ', response);
         if (response._data.id) {
             alert(' succeeded');
             localStorage.setItem('userData', JSON.stringify(response._data));

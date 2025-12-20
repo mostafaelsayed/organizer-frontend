@@ -7,6 +7,9 @@ export default defineConfig(({ mode }) => {
   // `VITE_` prefix.
   const env = loadEnv(mode, process.cwd(), '')
   return {
+    server: {
+      allowedHosts: true
+    },
     // vite config
     define: {
       __APP_ENV__: JSON.stringify(env.APP_ENV)

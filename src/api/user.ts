@@ -49,3 +49,18 @@ export async function deleteUser(email: string) {
     
     return data;
 }
+
+export async function getUserReservations() {
+    let requestOptions: RequestOptions = new RequestOptions(
+        {'Content-Type': 'application/json', 'Accept': 'application/json'},
+        JSON.stringify({"query": `{getUserReservations{_data{user{id, email, firstName}, reservations{id, name, description, createdAt, updatedAt, reservationTime}}, _statusCode}}`})
+    );
+    let response: ApiResponse = await sendRequest(import.meta.env.VITE_SERVER_URL, 'POST', requestOptions);
+    console.log(response);
+    if (response.status == 401 || response.status == 500) {
+        return response;
+    }
+    const data = response.data.getUserReservations._data;
+
+    return data;
+}

@@ -8,4 +8,5 @@ RUN npm install --no-package-lock
 
 # Bundle app source
 COPY . /usr/src/app
+EXPOSE 5173
 CMD ["npm", "start"]
