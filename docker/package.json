@@ -1,0 +1,11 @@
+{
+  "name": "organizer-frontend",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "5.1.0"
+  }
+}

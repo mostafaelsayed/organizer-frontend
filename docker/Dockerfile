@@ -7,6 +7,6 @@ COPY package.json /usr/src/app/
 RUN npm install --no-package-lock
 
 # Bundle app source
-COPY . /usr/src/app
+COPY app /usr/src/app
 EXPOSE 5173
-CMD ["npm", "start"]
+CMD ["npm", "run", "start"]
