@@ -1,6 +1,4 @@
-import { useNavigate } from 'react-router';
-import { login } from '../../api/user';
-import { useEffect, useState } from 'react';
+import { login, openidLogin } from '../../api/user';
 export default function Login() {    
     async function handleLogin(e) {
         e.preventDefault();
@@ -14,11 +12,20 @@ export default function Login() {
             localStorage.setItem('jwt', response._data.jwt);
         }
     }
+    async function openidBeginLogin() {
+        const response = await openidLogin();
+        console.log('openid res: ', response);
+    }
     return (
-        <form id='login'>
-            <input type='text' id='login-email' placeholder='Enter your email' />
-            <input type='password' id='login-password' placeholder='Enter your password' />
-            <button onClick={handleLogin}>Login</button>
-        </form>
+        <>
+            <form id='login'>
+                <input type='text' id='login-email' placeholder='Enter your email' />
+                <input type='password' id='login-password' placeholder='Enter your password' />
+                <button onClick={handleLogin}>Login</button>
+            </form>
+            <div id="sign-in-google">
+                <button onClick={openidBeginLogin}>Login with Google</button>
+            </div>
+        </>
     );
 }

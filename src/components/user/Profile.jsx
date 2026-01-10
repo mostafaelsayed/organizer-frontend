@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react"
 import { getUserReservations } from '../../api/user';
-import Login from "./Login";
 import { useNavigate } from "react-router";
 
 export default function Profile() {

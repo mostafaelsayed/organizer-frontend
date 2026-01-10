@@ -14,6 +14,8 @@ import TopMenu from './components/TopMenu.jsx';
 import Home from './components/Home.jsx';
 import DeleteUser from './components/user/DeleteUser.jsx';
 import CreateReservation from './components/reservation/CreateReservation.jsx';
+import OauthLogin from './components/user/OauthLogin.jsx';
+import OauthSignup from './components/user/OauthSignup.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -27,6 +29,8 @@ createRoot(document.getElementById('root')).render(
         <Route exact path="/deleteuser" element={<DeleteUser/>}/>
         <Route exact path="/signup" element={<Signup/>}/>
         <Route exact path="/login" element={<Login/>}/>
+        <Route exact path="/oauthlogin" element={<OauthLogin/>}/>
+        <Route exact path="/oauthsignup" element={<OauthSignup/>}/>
       </Routes>
     </BrowserRouter>
   </StrictMode>

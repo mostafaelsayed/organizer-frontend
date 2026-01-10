@@ -1,4 +1,4 @@
-import { signup } from '../../api/user';
+import { signup, openidSignup } from '../../api/user';
 export default function Signup() {   
     async function handleSignup(e) {
         e.preventDefault();
@@ -15,14 +15,23 @@ export default function Signup() {
             setLoggedIn(true);
         }
     }
+    async function openidBeginSignup() {
+        const response = await openidSignup();
+        console.log('openid res: ', response);
+    }
     return (
-        <form id='signup'>
-            <input type='text' id='signup-email' placeholder='Enter your email' />
-            <input type='text' id='signup-first' placeholder='Enter your first name' />
-            <input type='text' id='signup-last' placeholder='Enter your last name' />
-            <input type='text' id='signup-phone' placeholder='Enter your phone number' />
-            <input type='password' id='signup-password' placeholder='Enter your password' />
-            <button onClick={handleSignup}>Signup</button>
-        </form>
+        <>
+            <form id='signup'>
+                <input type='text' id='signup-email' placeholder='Enter your email' />
+                <input type='text' id='signup-first' placeholder='Enter your first name' />
+                <input type='text' id='signup-last' placeholder='Enter your last name' />
+                <input type='text' id='signup-phone' placeholder='Enter your phone number' />
+                <input type='password' id='signup-password' placeholder='Enter your password' />
+                <button onClick={handleSignup}>Signup</button>
+            </form>
+            <div id="sign-in-google">
+                <button onClick={openidBeginSignup}>Signup with Google</button>
+            </div>
+        </>
     );
 }

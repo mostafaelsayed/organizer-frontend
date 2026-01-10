@@ -1,0 +1,1 @@
+docker stop organizer-frontend && docker rm organizer-frontend
