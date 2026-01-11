@@ -18,7 +18,7 @@ import OauthLogin from './components/user/OauthLogin.jsx';
 import OauthSignup from './components/user/OauthSignup.jsx';
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
+  // <StrictMode>
     <BrowserRouter>
       <TopMenu></TopMenu>
       <Routes>
@@ -33,5 +33,5 @@ createRoot(document.getElementById('root')).render(
         <Route exact path="/oauthsignup" element={<OauthSignup/>}/>
       </Routes>
     </BrowserRouter>
-  </StrictMode>
+  // </StrictMode>
 )
