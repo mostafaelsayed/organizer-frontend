@@ -66,66 +66,26 @@ export async function getUserReservations() {
 }
 
 export async function openidLogin() {
-    // let requestOptions: RequestOptions = new RequestOptions(
-    //     {'Content-Type': 'application/json', 'Accept': 'application/json'},
-    //     JSON.stringify({"query": `{getUserReservations{_data{user{id, email, firstName}, reservations{id, name, description, createdAt, updatedAt, reservationTime}}, _statusCode}}`})
-    // );
     let response: ApiResponse = await sendRequest(import.meta.env.VITE_SERVER_URL + '/openidlogin', 'POST', undefined);
     console.log(response);
-    if (response.status == 401 || response.status == 500) {
-        return response;
-    }
-
-    // if (response.headers?.get('Location')) == ''
-
     return response;
 }
 
 export async function openidSignup() {
-    // let requestOptions: RequestOptions = new RequestOptions(
-    //     {'Content-Type': 'application/json', 'Accept': 'application/json'},
-    //     JSON.stringify({"query": `{getUserReservations{_data{user{id, email, firstName}, reservations{id, name, description, createdAt, updatedAt, reservationTime}}, _statusCode}}`})
-    // );
     let response: ApiResponse = await sendRequest(import.meta.env.VITE_SERVER_URL + '/openidsignup', 'POST', undefined);
     console.log(response);
-    if (response.status == 401 || response.status == 500) {
-        return response;
-    }
-
-    // if (response.headers?.get('Location')) == ''
-
     return response;
 }
 
 export async function openidSignupRedirect(params: URLSearchParams) {
-    // let requestOptions: RequestOptions = new RequestOptions(
-    //     {'Content-Type': 'application/json', 'Accept': 'application/json'},
-    //     JSON.stringify({"query": `{getUserReservations{_data{user{id, email, firstName}, reservations{id, name, description, createdAt, updatedAt, reservationTime}}, _statusCode}}`})
-    // );
     let response: ApiResponse = await sendRequest(import.meta.env.VITE_SERVER_URL + '/googlesignup' + params, 'POST', undefined);
     console.log(response);
-    if (response.status == 401 || response.status == 500) {
-        return response;
-    }
-
-    // if (response.headers?.get('Location')) == ''
-
     return response;
 }
 
 
 export async function openidLoginRedirect(params: URLSearchParams) {
-    // let requestOptions: RequestOptions = new RequestOptions(
-    //     {'Content-Type': 'application/json', 'Accept': 'application/json'},
-    //     JSON.stringify({"query": `{getUserReservations{_data{user{id, email, firstName}, reservations{id, name, description, createdAt, updatedAt, reservationTime}}, _statusCode}}`})
-    // );
     let response: ApiResponse = await sendRequest(import.meta.env.VITE_SERVER_URL + '/googlesignin' + params, 'POST', undefined);
     console.log(response);
-    if (response.status == 401 || response.status == 500) {
-        return response;
-    }
-
-    // if (response.headers?.get('Location')) == ''
-
     return response;
 }

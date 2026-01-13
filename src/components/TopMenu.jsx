@@ -1,10 +1,14 @@
 import { useNavigate } from 'react-router';
 import './TopMenu.css'
+import { sendRequest } from '../api/api_utils';
 export default function TopMenu() {
     const navigate = useNavigate();
-    function logout() {
-        localStorage.removeItem('userData');
-        navigate('/home');
+    async function logout() {
+        const res = await sendRequest(import.meta.env.VITE_SERVER_URL + '/logout', "POST");
+        console.log('llogout res: ', res);
+        if (res == 200) {
+            navigate('/login');
+        }
     }
     return (
         <>
